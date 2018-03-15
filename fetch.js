@@ -10,8 +10,9 @@ fetch("/get/filtered-json").then(function(res){
 
 
         for(department in data["departments"]){
+
             let li = document.createElement("li");
-            li.innerHTML = ` ${department} : ${data["departments"][department]}`;
+            li.innerHTML = ` ${data["departments"][department]["code"]} : ${data["departments"][department]["count"]}`;
             document.getElementById("departments").append(li);
         }
 

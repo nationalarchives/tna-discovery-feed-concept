@@ -68,6 +68,7 @@ function get_discovery_api() {
 }
 
 function filter_JSON_data(the_json) {
+
     let departments = {};
     let places = {}
     the_json["records"].forEach(function (data) {
@@ -78,7 +79,7 @@ function filter_JSON_data(the_json) {
             departments[data["department"]] = 1;
         }
 
-        if(data["places"].forEach(function (place){
+        data["places"].forEach(function (place){
 
             if(place.trim()){
                 if(place in places){
@@ -89,16 +90,13 @@ function filter_JSON_data(the_json) {
                 }
             }
 
-        }));
+        });
 
 
 
     });
 
-
-    console.log(places);
-
-    return { count: the_json["records"].length, departments, places };
+    return { count: the_json["count"], departments: the_json["departments"], places };
 }
 
 
