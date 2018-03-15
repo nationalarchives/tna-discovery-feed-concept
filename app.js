@@ -5,8 +5,6 @@ const fetch = require("node-fetch");
 let parsed_JSON = '...';
 let return_object = {};
 
-
-
 app.use("/", express.static(__dirname + '/'));
 
 app.get("/", function (req, res) {
@@ -69,15 +67,8 @@ function get_discovery_api() {
 
 function filter_JSON_data(the_json) {
 
-    let departments = {};
     let places = {}
     the_json["records"].forEach(function (data) {
-        if(data["department"] in departments){
-            departments[data["department"]]++;
-        }
-        else {
-            departments[data["department"]] = 1;
-        }
 
         data["places"].forEach(function (place){
 
@@ -91,8 +82,6 @@ function filter_JSON_data(the_json) {
             }
 
         });
-
-
 
     });
 
