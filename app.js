@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 
-let parsedJSON = '...';
+let parsed_JSON = '...';
+let return_object = {};
+
+
 
 app.use("/", express.static(__dirname + '/'));
 
@@ -10,12 +13,15 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + 'index.html');
 });
 
-app.get("/get/discovery-api-json", function (req, res) {
-    if(parsedJSON === '...'){
-        res.send(JSON.stringify({error: "The server has not finished loading the JSON."}));
+
+
+app.get("/get/filtered-json", function (req, res) {
+    if(parsed_JSON === '...'){
+        res.send(JSON.stringify({error: "The server has not finished loading..."}));
     }
     else {
-        res.send(JSON.stringify(parsedJSON));
+
+        res.send(JSON.stringify(return_object));
     }
 })
 
@@ -45,18 +51,35 @@ function get_discovery_api() {
 
     const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`
 
-    const getJSON = async url => {
+    const get_JSON = async url => {
         try {
             const http_response = await fetch(url);
             const discoveryJSON = await http_response.json();
-            parsedJSON = discoveryJSON;
+            return_object = filter_JSON_data(discoveryJSON);
+            parsed_JSON = discoveryJSON;
         }
         catch (error) {
             return {error: error};
         }
     }
 
-   getJSON(url);
+   get_JSON(url);
+}
+
+function filter_JSON_data(the_json) {
+    let departments = {};
+    the_json["records"].forEach(function (data) {
+        if(data["department"] in departments){
+            departments[data["department"]]++;
+        }
+        else {
+            departments[data["department"]] = 1;
+        }
+
+    });
+
+
+    return { count: the_json["records"].length, departments };
 }
 
 
