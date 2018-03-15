@@ -59,7 +59,8 @@ function get_discovery_api() {
             parsed_JSON = discoveryJSON;
         }
         catch (error) {
-            return {error: error};
+            console.log("API Error: " + error);
+           return_object = {count: 0, departments: {error: 0} };
         }
     }
 
@@ -68,6 +69,7 @@ function get_discovery_api() {
 
 function filter_JSON_data(the_json) {
     let departments = {};
+    let places = {}
     the_json["records"].forEach(function (data) {
         if(data["department"] in departments){
             departments[data["department"]]++;
@@ -76,10 +78,27 @@ function filter_JSON_data(the_json) {
             departments[data["department"]] = 1;
         }
 
+        if(data["places"].forEach(function (place){
+
+            if(place.trim()){
+                if(place in places){
+                    places[place]++;
+                }
+                else {
+                    places[place] = 1;
+                }
+            }
+
+        }));
+
+
+
     });
 
 
-    return { count: the_json["records"].length, departments };
+    console.log(places);
+
+    return { count: the_json["records"].length, departments, places };
 }
 
 
