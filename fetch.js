@@ -25,8 +25,6 @@ fetch("/get/filtered-json").then(function(res){
             create_li("time_periods", `${data["time_periods"][timePeriod]["code"]} : ${data["time_periods"][timePeriod]["count"]}`);
         }
 
-
-
     })
 
     function create_li(ul_id, inner_html_data) {
