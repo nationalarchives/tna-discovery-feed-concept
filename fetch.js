@@ -11,11 +11,20 @@ fetch("/get/filtered-json").then(function(res){
             document.getElementById("departments").append(li);
         }
 
-        for(place in data["places"]){
+        if(data["places"].length > 0){
+            for(place in data["places"]){
+                let li = document.createElement("li");
+                li.innerHTML = ` ${place} : ${data["places"][place]}`;
+                document.getElementById("places").append(li);
+            }
+        }
+        else {
             let li = document.createElement("li");
-            li.innerHTML = ` ${place} : ${data["places"][place]}`;
+            li.innerHTML = `None of the documents contain semantics on places.`;
             document.getElementById("places").append(li);
         }
+
+
 
         for(taxonomy in data["taxonomies"]){
             let li = document.createElement("li");
