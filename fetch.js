@@ -1,13 +1,8 @@
 fetch("/get/filtered-json").then(function(res){
     res.json().then(function (data) {
 
-
-        let h1 = document.createElement("h1");
+        let h1 = document.getElementById("record_release_count");
         h1.innerHTML = `${data["count"]} records released in the last 24 hours.`;
-        document.body.appendChild(h1);
-
-
-
 
         for(department in data["departments"]){
 
@@ -22,7 +17,12 @@ fetch("/get/filtered-json").then(function(res){
             document.getElementById("places").append(li);
         }
 
+        for(taxonomy in data["taxonomies"]){
+            let li = document.createElement("li");
+            li.innerHTML = ` ${data["taxonomies"][taxonomy]["code"]} : ${data["taxonomies"][taxonomy]["count"]}`;
+            document.getElementById("taxonomies").append(li);
 
+        }
 
     })
 });

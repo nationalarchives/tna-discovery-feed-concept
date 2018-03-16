@@ -66,7 +66,7 @@ function get_discovery_api() {
 }
 
 function filter_JSON_data(the_json) {
-
+    console.log(the_json);
     let places = {}
     the_json["records"].forEach(function (data) {
 
@@ -85,7 +85,5 @@ function filter_JSON_data(the_json) {
 
     });
 
-    return { count: the_json["count"], departments: the_json["departments"], places };
+    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePerioids"], places };
 }
-
-
