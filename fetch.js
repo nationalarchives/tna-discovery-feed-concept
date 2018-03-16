@@ -1,6 +1,6 @@
 fetch("/get/filtered-json").then(function(res){
     res.json().then(function (data) {
-
+        console.log(data);
         let h1 = document.getElementById("record_release_count");
         h1.innerHTML = `${data["count"]} records released in the last 24 hours.`;
 
@@ -20,6 +20,12 @@ fetch("/get/filtered-json").then(function(res){
         for(taxonomy in data["taxonomies"]){
             create_li("taxonomies", `${data["taxonomies"][taxonomy]["code"]} : ${data["taxonomies"][taxonomy]["count"]}`);
         }
+
+        for(timePeriod in data["time_periods"]){
+            create_li("time_periods", `${data["time_periods"][timePeriod]["code"]} : ${data["time_periods"][timePeriod]["count"]}`);
+        }
+
+
 
     })
 

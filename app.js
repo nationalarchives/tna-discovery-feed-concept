@@ -85,5 +85,5 @@ function filter_JSON_data(the_json) {
 
     });
 
-    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePerioids"], places };
+    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places };
 }
