@@ -70,6 +70,10 @@ app.use(function (req, res, next) {
 
     // Passport's error message
     res.locals.error = req.flash('error');
+
+    // To check if logged in
+    res.locals.user = req.user || null;
+
     next();
 });
 

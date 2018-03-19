@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/tna-css-toolkit/tna-forms.css.min">
-    <link rel="stylesheet" href="/tna-css-toolkit/tna-base.css.min">
 <title>Discovery Feed</title>
 </head>
 <body>
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/users/login">Login</a></li>
-    <li><a href="/users/register">Register</a></li>
-    <li><a href="/users/logout">Logout</a></li>
-</ul>
 
 {{#if success_msg}}
     <div class="" role="alert">{{success_msg}}</div>
@@ -30,7 +22,19 @@
     </div>
 {{/if}}
 
+<ul>
+    <li><a href="/">Home</a></li>
+    {{#if user}}
+        <li><a href="/users/logout">Logout</a></li>
 
+    {{else}}
+        <li><a href="/users/login">Login</a></li>
+        <li><a href="/users/register">Register</a></li>
+
+    {{/if}}
+
+
+</ul>
 {{{body}}}
 </body>
 </html>
