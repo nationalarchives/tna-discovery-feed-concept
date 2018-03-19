@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="/tna-css-toolkit/tna-forms.css.min">
+    <link rel="stylesheet" href="/tna-css-toolkit/tna-base.css.min">
 <title>Discovery Feed</title>
 </head>
 <body>
@@ -10,6 +12,25 @@
     <li><a href="/users/register">Register</a></li>
     <li><a href="/users/logout">Logout</a></li>
 </ul>
+
+{{#if success_msg}}
+    <div class="" role="alert">{{success_msg}}</div>
+{{/if}}
+
+{{#if error_msg}}
+    <div class="emphasis-block error-message" role="alert">
+        <p class="h3">Sorry, there was a problem</p>
+        <p>{{error_msg}}</p></div>
+{{/if}}
+
+{{#if error}}
+    <div class="emphasis-block error-message" role="alert">
+        <p class="h3">Sorry, there was a problem</p>
+        <p>{{error_msg}}</p>
+    </div>
+{{/if}}
+
+
 {{{body}}}
 </body>
 </html>
