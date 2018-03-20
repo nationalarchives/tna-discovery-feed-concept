@@ -3,26 +3,25 @@
 const express = require("express");
 
 // Login dependencies
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var exphbs = require("express-handlebars");
-var expressValidator = require("express-validator");
-var flash = require("connect-flash");
-var session = require("express-session");
-var passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
-var mongo = require("mongodb");
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const exphbs = require("express-handlebars");
+const expressValidator = require("express-validator");
+const flash = require("connect-flash");
+const session = require("express-session");
+const passport = require("passport");
+const routes = require('./routes/index');
+const users = require('./routes/users');
+const feed_options = require('./routes/feed_options');
+const data_route = require('./routes/data');
 
-
+const globals = require('./functions/globals');
 const app = express();
 
 // view engine
 app.set('views',__dirname + '/views');
-app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.engine('handlebars', exphbs({defaultLayout: 'layout', helpers: require('./functions/handlebar_helpers')}));
 app.set('view engine', 'handlebars');
 
 // BodyParser middleware
@@ -79,6 +78,8 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users)
+app.use('/feed', feed_options)
+app.use('/data', data_route);
 
 app.set('port', 3000);
 
@@ -89,47 +90,30 @@ app.listen(app.get('port'), function (error) {
     else {
         console.log("Server started")
     }
+    get_discovery_api();
 })
 
-/*
 const fetch = require("node-fetch");
 
-let parsed_JSON = '...';
-let return_object = {};
 
-app.get("/", function (req, res) {
-    res.sendFile(__dirname + 'index.html');
-});
-
-
-
-app.get("/get/filtered-json", function (req, res) {
-    if(parsed_JSON === '...'){
-        res.send(JSON.stringify({error: "The server has not finished loading..."}));
+function get_JSON_async(url, callback) {
+    const get_JSON = async url => {
+        try {
+            const http_response = await fetch(url);
+            const return_json = await http_response.json();
+            return callback(return_json);
+        }
+        catch (error) {
+            console.log("API Error: " + error);
+            return callback(error);
+        }
     }
-    else {
-
-        res.send(JSON.stringify(return_object));
-    }
-})
-
-
-app.listen(3000, (error) => {
-    if(error){
-        console.log("error");
-    }
-    else {
-        console.log("Server running");
-    }
-
-    get_discovery_api()
-})
-
+    get_JSON(url);
+}
 
 function get_discovery_api() {
 
     //ISO date strings are needed to get todays and yesterdays dates, for the previous 24 hours
-
     let today = new Date();
     let today_ISO_string = today.toISOString().substring(0,10);
 
@@ -139,20 +123,10 @@ function get_discovery_api() {
 
     const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`
 
-    const get_JSON = async url => {
-        try {
-            const http_response = await fetch(url);
-            const discoveryJSON = await http_response.json();
-            return_object = filter_JSON_data(discoveryJSON);
-            parsed_JSON = discoveryJSON;
-        }
-        catch (error) {
-            console.log("API Error: " + error);
-           return_object = {count: 0, departments: {error: 0} };
-        }
-    }
+    get_JSON_async(url, function (return_json) {
+        globals.return_object = filter_JSON_data(return_json);
+    })
 
-   get_JSON(url);
 }
 
 function filter_JSON_data(the_json) {
@@ -176,4 +150,5 @@ function filter_JSON_data(the_json) {
     });
 
     return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places };
-}*/
+}
+

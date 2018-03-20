@@ -1,12 +1,19 @@
-fetch("/get/filtered-json").then(function(res){
+/*
+fetch("/data/filtered-json").then(function(res){
     res.json().then(function (data) {
 
         let h1 = document.getElementById("record_release_count");
         h1.innerHTML = `${data["count"]} records released in the last 24 hours.`;
 
-        for(let department in data["departments"]){
-            create_li("departments", `${data["departments"][department]["code"]} : ${data["departments"][department]["count"]}`)
-        }
+
+        fetch("/data/departments-json").then(function(deparment_res){
+            deparment_res.json().then(function (department_data) {
+                for(let department in data["departments"]){
+                    let department_code = data["departments"][department]["code"];
+                    create_li("departments", `${department_data["departments"][department_code]} : ${data["departments"][department]["count"]}`)
+                }
+            })
+        });
 
         if(data["places"].length > 0){
             for(let place in data["places"]){
@@ -33,4 +40,4 @@ fetch("/get/filtered-json").then(function(res){
         document.getElementById(ul_id).append(li);
     }
 
-});
+});*/
