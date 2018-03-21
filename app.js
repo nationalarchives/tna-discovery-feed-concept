@@ -92,7 +92,11 @@ app.listen(app.get('port'), function (error) {
     }
     else {
         console.log("Server started")
+
         get_discovery_api();
+
+        // Run every 24 hours.
+        setInterval(get_discovery_api, 86400000);
     }
 
 })
