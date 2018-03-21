@@ -11,6 +11,7 @@ const expressValidator = require("express-validator");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const feed_options = require('./routes/feed_options');
@@ -18,6 +19,7 @@ const data_route = require('./routes/data');
 
 const globals = require('./functions/globals');
 const app = express();
+globals.departments_json = require("./data/departments.json");
 
 // view engine
 app.set('views',__dirname + '/views');
@@ -72,6 +74,7 @@ app.use(function (req, res, next) {
 
     // To check if logged in
     res.locals.user = req.user || null;
+    res.locals.url = req.protocol + "://" + req.get('host');
 
     next();
 });
@@ -89,8 +92,9 @@ app.listen(app.get('port'), function (error) {
     }
     else {
         console.log("Server started")
+        get_discovery_api();
     }
-    get_discovery_api();
+
 })
 
 const fetch = require("node-fetch");
@@ -128,9 +132,12 @@ function get_discovery_api() {
     })
 
 }
+function get_departments_parsers_json(){
+
+}
 
 function filter_JSON_data(the_json) {
-    console.log(the_json);
+
     let places = {}
     the_json["records"].forEach(function (data) {
 
