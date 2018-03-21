@@ -45,5 +45,17 @@ module.exports = {
            return_data = return_data + `<li> ${taxonomies[taxonomy]["code"]} : ${taxonomies[taxonomy]["count"]} </li>`;
         }
         return return_data + "</ul>";
+    },
+    time_periods: function () {
+        let time_periods = globals.return_object["time_periods"];
+        let return_data = `<ul>`;
+        for(let time_period in time_periods){
+            return_data = return_data + `<li> ${time_periods[time_period]["code"]} : ${time_periods[time_period]["count"]}`
+        }
+        return return_data + "</ul>";
+    },
+    record_count: function() {
+        let count = globals.return_object["count"];
+        return `<h1> ${count}  records released in the last 24 hours. </h1>`
     }
 }
