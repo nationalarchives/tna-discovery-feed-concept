@@ -122,6 +122,10 @@ function get_JSON_async(url, callback) {
 
 function get_discovery_api() {
 
+    let tommorow = new Date();
+    tommorow.setDate(tommorow.getDate()+1);
+    globals.next_update = tommorow;
+
     //ISO date strings are needed to get todays and yesterdays dates, for the previous 24 hours
     let today = new Date();
     let today_ISO_string = today.toISOString().substring(0,10);
