@@ -139,6 +139,7 @@ function get_discovery_api() {
         else {
             globals.return_object = filter_JSON_data(return_json);
         }
+
     })
 
 }

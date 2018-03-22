@@ -3,30 +3,27 @@ const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
+const {check, validationResult} = require('express-validator/check');
 
 router.get('/register', function (req, res) {
     res.render('register');
 })
 
-router.post('/register', function (req, res) {
+router.post('/register', [
+    check('name').isLength({min:1}).withMessage("Name must contain a value."),
+    check('username').isLength({min:1}).withMessage("Username must contain a value."),
+    check('password').isLength({min:1}).withMessage("Password must contain a value."),
+    check('email').isEmail().withMessage("Email is invalid.")
+], (req, res) => {
+
+    const errors = validationResult(req);
     let name = req.body.name;
     let email = req.body.email;
     let username = req.body.username;
     let password = req.body.password;
 
-    // Validation
-    req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('email', 'Email is required').notEmpty();
-    req.checkBody('email', 'Email is not valid').isEmail();
-    req.checkBody('username', 'Username is required').notEmpty();
-    req.checkBody('password', 'Password is required').notEmpty();
-
-    // Check two fields: req.checkBody('password2', 'Passwords do not match').equals(req.body.password1);
-
-    var errors = req.validationErrors();
-
-    if(errors) {
-       res.render('register', {errors});
+    if(!errors.isEmpty()) {
+       res.render('register', {errors: errors.mapped()});
     }
     else {
         var newUser = new User( {
