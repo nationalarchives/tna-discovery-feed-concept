@@ -4,10 +4,10 @@ const express = require("express");
 
 // Login dependencies
 
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const exphbs = require("express-handlebars");
-const expressValidator = require("express-validator");
+const cookie_parser = require('cookie-parser');
+const body_parser = require('body-parser');
+const express_handlebars = require("express-handlebars");
+const express_validator = require("express-validator");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
@@ -23,13 +23,13 @@ globals.departments_json = require("./data/departments.json");
 
 // view engine
 app.set('views',__dirname + '/views');
-app.engine('handlebars', exphbs({defaultLayout: 'layout', helpers: require('./functions/handlebar_helpers')}));
+app.engine('handlebars', express_handlebars({defaultLayout: 'layout', helpers: require('./functions/handlebar_helpers')}));
 app.set('view engine', 'handlebars');
 
 // BodyParser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
+app.use(body_parser.json());
+app.use(body_parser.urlencoded({extended: true}));
+app.use(cookie_parser());
 
 // Static folder
 app.use(express.static(__dirname + '/public'));
@@ -44,7 +44,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(expressValidator({
+app.use(express_validator({
     errorFormatter: function (param, msg, value) {
         var namespace = param.split('.'),
             root = namespace.shift(),
@@ -79,6 +79,8 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+//From these URL's, use the following js files for their routes
 app.use('/', routes);
 app.use('/users', users)
 app.use('/feed', feed_options)
