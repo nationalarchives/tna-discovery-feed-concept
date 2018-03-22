@@ -2,7 +2,7 @@ const globals = require("../functions/globals");
 const fetch = require("node-fetch");
 
 module.exports = {
-    departments: function () {
+    get_departments: function () {
 
         let departments_data = globals.return_object["departments"];
         let department_long_names = globals.departments_json["departments"];
@@ -23,7 +23,8 @@ module.exports = {
 
         return return_data + "</ul>";
     },
-    places: function () {
+
+    get_places: function () {
         let places = globals.return_object["places"];
         let return_data = `<ul>`;
         if( places.length > 0){
@@ -38,7 +39,7 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    taxonomies: function () {
+    get_taxonomies: function () {
         let taxonomies = globals.return_object["taxonomies"];
         let return_data = `<ul>`;
         for(let taxonomy in taxonomies){
@@ -46,7 +47,7 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    time_periods: function () {
+    get_time_periods: function () {
         let time_periods = globals.return_object["time_periods"];
         let return_data = `<ul>`;
         for(let time_period in time_periods){
@@ -54,7 +55,7 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    record_count: function() {
+    get_record_count: function() {
         let count = globals.return_object["count"];
         return `<h1> ${count}  records released in the last 24 hours. </h1>`
     }

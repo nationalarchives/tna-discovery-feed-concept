@@ -24,8 +24,10 @@
 {{/if}}
 
 <ul>
-    <li><a href="/">Home</a></li>
+
     {{#if user}}
+        <li><a href="/">Home</a></li>
+        <li><a href="/feed/options">Options</a></li>
         <li><a href="/users/logout">Logout</a></li>
 
     {{else}}
