@@ -10,22 +10,23 @@ router.get('/register', function (req, res) {
 })
 
 router.post('/register', [
-    check('name').isLength({min:1}).withMessage("Name must contain a value."),
-    check('username').isLength({min:1}).withMessage("Username must contain a value."),
-    check('password').isLength({min:1}).withMessage("Password must contain a value."),
-    check('email').isEmail().withMessage("Email is invalid.")
+    check('name', 'Name must contain a value.').isLength({min:1}),
+    check('username', 'Username must contain a value.').isLength({min:1}),
+    check('password', 'Password must contain at least 6 characters and 1 number.').isLength({min:6}).matches(/\d/),
+    check('email', 'Email is invalid.').isEmail()
 ], (req, res) => {
 
     const errors = validationResult(req);
-    let name = req.body.name;
-    let email = req.body.email;
-    let username = req.body.username;
-    let password = req.body.password;
-
     if(!errors.isEmpty()) {
        res.render('register', {errors: errors.mapped()});
     }
     else {
+
+        let name = req.body.name;
+        let email = req.body.email;
+        let username = req.body.username;
+        let password = req.body.password;
+
         var newUser = new User( {
             name, email, username, password
         });
