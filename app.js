@@ -136,9 +136,6 @@ function get_discovery_api() {
     })
 
 }
-function get_departments_parsers_json(){
-
-}
 
 function filter_JSON_data(the_json) {
 
