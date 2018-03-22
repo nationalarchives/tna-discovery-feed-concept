@@ -111,11 +111,10 @@ function get_JSON_async(url, callback) {
         try {
             const http_response = await fetch(url);
             const return_json = await http_response.json();
-            return callback(return_json);
+            return callback(null, return_json);
         }
         catch (error) {
-            console.log("API Error: " + error);
-            return callback(error);
+            return callback(error, null);
         }
     }
     get_JSON(url);
@@ -133,8 +132,13 @@ function get_discovery_api() {
 
     const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`
 
-    get_JSON_async(url, function (return_json) {
-        globals.return_object = filter_JSON_data(return_json);
+    get_JSON_async(url, function (error, return_json) {
+        if(error){
+            console.log("API Error: " + error);
+        }
+        else {
+            globals.return_object = filter_JSON_data(return_json);
+        }
     })
 
 }
@@ -146,7 +150,10 @@ function filter_JSON_data(the_json) {
 
         data["places"].forEach(function (place){
 
+            // Some entries have are just whitespace, so check if the string still exists after trimmed.
             if(place.trim()){
+
+                // If place already exists in object, increment by 1, else add it to the object with value of 1.
                 if(place in places){
                     places[place]++;
                 }
