@@ -80,7 +80,7 @@ app.use(function (req, res, next) {
 });
 
 
-//From these URL's, use the following js files for their routes
+//From these entry point URL's, use the following js files for their routes
 app.use('/', routes);
 app.use('/users', users)
 app.use('/feed', feed_options)
@@ -122,9 +122,9 @@ function get_JSON_async(url, callback) {
 
 function get_discovery_api() {
 
-    let tommorow = new Date();
-    tommorow.setDate(tommorow.getDate()+1);
-    globals.next_update = tommorow;
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    globals.next_update = tomorrow;
 
     //ISO date strings are needed to get todays and yesterdays dates, for the previous 24 hours
     let today = new Date();
@@ -149,9 +149,11 @@ function get_discovery_api() {
 }
 
 function filter_JSON_data(the_json) {
-
     let places = {}
+    let record_titles = [];
     the_json["records"].forEach(function (data) {
+
+        record_titles.push(data.title);
 
         data["places"].forEach(function (place){
 
@@ -171,6 +173,8 @@ function filter_JSON_data(the_json) {
 
     });
 
-    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places };
+    record_titles.sort();
+
+    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, record_titles };
 }
 

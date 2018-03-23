@@ -1,8 +1,7 @@
 const globals = require("../functions/globals");
-const fetch = require("node-fetch");
 
 module.exports = {
-    get_departments: function () {
+    get_departments: () => {
 
         let departments_data = globals.return_object["departments"];
         let department_long_names = globals.departments_json["departments"];
@@ -24,7 +23,7 @@ module.exports = {
         return return_data + "</ul>";
     },
 
-    get_places: function () {
+    get_places: () => {
         let places = globals.return_object["places"];
         let return_data = `<ul>`;
         if( places.length > 0){
@@ -39,7 +38,7 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    get_taxonomies: function () {
+    get_taxonomies: () => {
         let taxonomies = globals.return_object["taxonomies"];
         let return_data = `<ul>`;
         for(let taxonomy in taxonomies){
@@ -47,7 +46,7 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    get_time_periods: function () {
+    get_time_periods: () => {
         let time_periods = globals.return_object["time_periods"];
         let return_data = `<ul>`;
         for(let time_period in time_periods){
@@ -55,8 +54,20 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    get_feed_info: function() {
+    get_feed_info: () => {
         let count = globals.return_object["count"];
         return `<h1> ${count}  records released in the last 24 hours. </h1> <h4> Next feed update: ${globals.next_update}</h4>`
+    },
+    get_record_titles: () => {
+        let return_data = '<ul>';
+        let records_array = globals.return_object["record_titles"];
+
+        console.log("Record Titles Length: " + records_array.length);
+
+        records_array.forEach((data) =>{
+           return_data += `<li>${data}</li>`;
+        });
+
+        return return_data;
     }
 }
