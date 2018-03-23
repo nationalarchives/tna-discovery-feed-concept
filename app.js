@@ -2,7 +2,7 @@
 
 const express = require("express");
 
-// Login dependencies
+// BEGIN Login dependencies
 
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
@@ -11,6 +11,8 @@ const express_validator = require("express-validator");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+
+// END Login dependencies
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
@@ -149,11 +151,14 @@ function get_discovery_api() {
 }
 
 function filter_JSON_data(the_json) {
+
     let places = {}
-    let record_titles = [];
+    let records = {};
+
     the_json["records"].forEach(function (data) {
 
-        record_titles.push(data.title);
+
+       records[Object.keys(records).length] = {title: data.title, description: data.description, context: data.context};
 
         data["places"].forEach(function (place){
 
@@ -173,8 +178,6 @@ function filter_JSON_data(the_json) {
 
     });
 
-    record_titles.sort();
-
-    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, record_titles };
+    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, records };
 }
 

@@ -59,15 +59,11 @@ module.exports = {
         return `<h1> ${count}  records released in the last 24 hours. </h1> <h4> Next feed update: ${globals.next_update}</h4>`
     },
     get_record_titles: () => {
-        let return_data = '<ul>';
-        let records_array = globals.return_object["record_titles"];
-
-        console.log("Record Titles Length: " + records_array.length);
-
-        records_array.forEach((data) =>{
-           return_data += `<li>${data}</li>`;
-        });
-
-        return return_data;
+        let return_data = `<ul>`;
+        let records = globals.return_object["records"];
+        for(let record in records) {
+            return_data += `<li>${records[record]["description"]} <ul><li>${records[record]["context"]}</li></ul> </li>`;
+        }
+        return return_data + "</ul>";
     }
 }
