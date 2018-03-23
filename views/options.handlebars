@@ -1,2 +1,12 @@
-<h2>Feed Options</h2>
+<h1>Feed Options</h1>
 
+
+<h2>Your department subscriptions</h2>
+<form action="/feed/options" method="post">
+    <div class="form-department-checkboxes">
+    {{#load_user_option_boxes}}
+
+    {{/load_user_option_boxes}}
+    </div>
+    <input type="submit" />
+</form>

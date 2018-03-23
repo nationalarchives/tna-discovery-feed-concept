@@ -1,3 +1,9 @@
-li {
+li, .form-department-checkbox {
     margin-bottom: 1%;
+}
+
+.form-department-checkboxes {
+    overflow-y: scroll;
+    max-height:500px;
+    width: 50%;
 }

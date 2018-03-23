@@ -17,7 +17,7 @@ module.exports = {
 
             let department_count = departments_data[i]["count"];
 
-            return_data = return_data + `<li> ${department_code} : ${department_count} </li>`
+            return_data += `<li> ${department_code} : ${department_count} </li>`
         }
 
         return return_data + "</ul>";
@@ -29,12 +29,12 @@ module.exports = {
         if( places.length > 0){
 
             for(let place in places){
-                return_data = return_data + `<li> ${place} : ${places[place]} </li>`;
+                return_data += `<li> ${place} : ${places[place]} </li>`;
             }
 
         }
         else {
-            return_data = return_data + `<li> None of the documents contain semantics on places. </li>`;
+            return_data += `<li> None of the documents contain semantics on places. </li>`;
         }
         return return_data + "</ul>";
     },
@@ -42,7 +42,7 @@ module.exports = {
         let taxonomies = globals.return_object["taxonomies"];
         let return_data = `<ul>`;
         for(let taxonomy in taxonomies){
-           return_data = return_data + `<li> ${taxonomies[taxonomy]["code"]} : ${taxonomies[taxonomy]["count"]} </li>`;
+           return_data += `<li> ${taxonomies[taxonomy]["code"]} : ${taxonomies[taxonomy]["count"]} </li>`;
         }
         return return_data + "</ul>";
     },
@@ -50,7 +50,7 @@ module.exports = {
         let time_periods = globals.return_object["time_periods"];
         let return_data = `<ul>`;
         for(let time_period in time_periods){
-            return_data = return_data + `<li> ${time_periods[time_period]["code"]} : ${time_periods[time_period]["count"]}`
+            return_data += `<li> ${time_periods[time_period]["code"]} : ${time_periods[time_period]["count"]}`
         }
         return return_data + "</ul>";
     },
@@ -65,5 +65,17 @@ module.exports = {
             return_data += `<li>${records[record]["description"]} <ul><li>${records[record]["context"]}</li></ul> </li>`;
         }
         return return_data + "</ul>";
+    },
+    load_user_option_boxes: () => {
+        let return_data = '';
+        let departments = globals.departments_json["departments"];
+
+        Object.keys(departments).forEach(function (key) {
+            return_data += `<div class="form-row"><label for='${key}'>${departments[key]}</label>
+                            <input type="checkbox" name="${key}" class="form-department-checkbox"></div>
+                            `
+        })
+
+        return return_data;
     }
 }
