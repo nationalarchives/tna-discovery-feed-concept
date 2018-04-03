@@ -65,5 +65,9 @@ module.exports = {
             return_data += `<li>${records[record]["description"]} <ul><li>${records[record]["context"]}</li></ul> </li>`;
         }
         return return_data + "</ul>";
+    },
+    get_long_department_name: (key) => {
+       return globals.departments_json["departments"][key];
     }
+
 }

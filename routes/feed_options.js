@@ -3,11 +3,11 @@ var router = express.Router();
 const globals = require("../functions/globals")
 const User = require('../models/user');
 
-router.get('/options', globals.ensure_authenticated, function (req, res) {
+router.get('/subscriptions', globals.ensure_authenticated, function (req, res) {
     res.render('options', { subscription: req.user.department_subscriptions});
 })
 
-router.post('/options', globals.ensure_authenticated, function(req, res) {
+router.post('/subscriptions', globals.ensure_authenticated, function(req, res) {
     let userSettings = {};
     let departments = globals.departments_json["departments"];
 
@@ -15,18 +15,23 @@ router.post('/options', globals.ensure_authenticated, function(req, res) {
         userSettings[key] = (req.body[key] == 'on');
     })
 
+    let error = "";
+
    User.findOneAndUpdate(req.user.username, {department_subscriptions: userSettings}, {upsert: true}, function (error, doc) {
        if(error){
-           req.flash('success_msg', 'Error: subscriptions were not updated.');
-           console.log(error);
-       }
-       else {
-           req.flash('success_msg', 'Subscriptions updated.');
+          this.error = error;
        }
     })
 
+    if(error) {
+       req.flash('error_msg', error);
+    }
+    else {
+        req.flash('success_msg', 'Subscriptions updated.');
+    }
 
-    res.redirect('/feed/options');
+
+    res.redirect('/feed/subscriptions');
 });
 
 module.exports = router;

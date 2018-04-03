@@ -1,28 +1,30 @@
-<h1>Feed Options</h1>
+<h1>Your Subscriptions</h1>
 
 <h2>Department Subscriptions</h2>
-<form action="/feed/options" method="post">
+<form action="/feed/subscriptions" method="post">
     <div class="form-department-checkboxes">
         <ul>
+            <h3>Subscribed</h3>
             {{#each subscription}}
                 {{#if this}}
                     <div class="form-row">
                         <input type="checkbox" name="{{@key}}"
-                               checked/> {{@key}} : subscribed
+                               checked/> <strong>{{get_long_department_name @key}}</strong> : subscribed
                     </div>
                 {{/if}}
             {{/each}}
-
+            <hr>
+            <h3>Not subscribed</h3>
             {{#each subscription}}
                 {{#unless this}}
                     <div class="form-row">
-                        <input type="checkbox" name="{{@key}}"/> {{@key}} : not subscribed
+                        <input type="checkbox" name="{{@key}}"/>  <strong>{{get_long_department_name @key}}</strong> : not subscribed
                     </div>
                 {{/unless}}
             {{/each}}
         </ul>
     </div>
 
-    <input type="submit"/>
+    <input type="submit" value="Update Subscriptions"/>
 
 </form>

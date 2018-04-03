@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
+
 li, .form-department-checkbox {
     margin-bottom: 1%;
 }
 
 .form-department-checkboxes {
     overflow-y: scroll;
-    max-height:500px;
+    max-height:800px;
     width: 50%;
 }
