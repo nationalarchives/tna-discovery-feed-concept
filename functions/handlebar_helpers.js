@@ -65,17 +65,5 @@ module.exports = {
             return_data += `<li>${records[record]["description"]} <ul><li>${records[record]["context"]}</li></ul> </li>`;
         }
         return return_data + "</ul>";
-    },
-    load_user_option_boxes: () => {
-        let return_data = '';
-        let departments = globals.departments_json["departments"];
-
-        Object.keys(departments).forEach(function (key) {
-            return_data += `<div class="form-row"><label for='${key}'>${departments[key]}</label>
-                            <input type="checkbox" name="${key}" class="form-department-checkbox"></div>
-                            `
-        })
-
-        return return_data;
     }
 }

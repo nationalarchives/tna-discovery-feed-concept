@@ -4,7 +4,7 @@ const globals = require("../functions/globals")
 const User = require('../models/user');
 
 router.get('/options', globals.ensure_authenticated, function (req, res) {
-    res.render('options');
+    res.render('options', { subscription: req.user.department_subscriptions});
 })
 
 router.post('/options', globals.ensure_authenticated, function(req, res) {
