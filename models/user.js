@@ -19,6 +19,9 @@ var UserSchema = mongoose.Schema({
     },
     name: {
         type: String
+    },
+    department_subscriptions: {
+        type: Object
     }
 
 });
@@ -49,4 +52,8 @@ module.exports.comparePassword = function(candidatePassword, hash, callback ) {
 
 module.exports.getUserById = function (id, callback) {
     User.findById(id, callback);
+}
+
+module.exports.updateDepartmentSubscriptions = function (data) {
+    this.update({$set: {department_subscriptions: data}});
 }

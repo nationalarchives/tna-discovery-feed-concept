@@ -22,6 +22,7 @@ const data_route = require('./routes/data');
 const globals = require('./functions/globals');
 const app = express();
 globals.departments_json = require("./data/departments.json");
+globals.discovery_json = require("./data/discovery.json");
 
 // view engine
 app.set('views',__dirname + '/views');
@@ -97,10 +98,13 @@ app.listen(app.get('port'), function (error) {
     else {
         console.log("Server started")
 
-        get_discovery_api();
+       /* get_discovery_api();
 
         // Run every 24 hours.
-        setInterval(get_discovery_api, 86400000);
+        setInterval(get_discovery_api, 86400000);*/
+
+        globals.return_object = filter_JSON_data(globals.discovery_json);
+
     }
 
 })
