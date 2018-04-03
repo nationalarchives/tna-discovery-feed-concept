@@ -1,4 +1,4 @@
-<h1>Your Subscriptions</h1>
+<h1>My Subscriptions</h1>
 
 <h2>Department Subscriptions</h2>
 <form action="/feed/subscriptions" method="post">
@@ -8,7 +8,7 @@
             {{#each subscription}}
                 {{#if this}}
                     <div class="form-row">
-                        <input type="checkbox" name="{{@key}}"
+                        <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
                                checked/> <strong>{{get_long_department_name @key}}</strong> : subscribed
                     </div>
                 {{/if}}
@@ -18,7 +18,7 @@
             {{#each subscription}}
                 {{#unless this}}
                     <div class="form-row">
-                        <input type="checkbox" name="{{@key}}"/>  <strong>{{get_long_department_name @key}}</strong> : not subscribed
+                        <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>  <strong>{{get_long_department_name @key}}</strong> : not subscribed
                     </div>
                 {{/unless}}
             {{/each}}

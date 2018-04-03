@@ -3,9 +3,10 @@
 <head>
 <title>Discovery Feed</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="http://www.nationalarchives.gov.uk/wp-content/themes/tna-base/css/base-sass.css.min?ver=1.11">
 </head>
 <body>
-
+<div class="container">
 {{#if success_msg}}
     <div class="" role="alert">{{success_msg}}</div>
 {{/if}}
@@ -24,20 +25,21 @@
     </div>
 {{/if}}
 
-<ul>
+<img src="/tna-logo.png" class="centre-image">
 
-    {{#if user}}
-        <li><a href="/">Feed Home</a></li>
-        <li><a href="/feed/subscriptions">My Feed Options</a></li>
-        <li><a href="/users/logout">Logout</a></li>
+<ul>
+    <li>
+       {{#if user}}
+        <a href="/">Home</a> | <a href="/feed/subscriptions">My Subscriptions</a> | <a href="/users/logout">Logout</a>
 
     {{else}}
-        <li><a href="/users/login">Login</a></li>
-        <li><a href="/users/register">Register</a></li>
-
+        <a href="/users/login">Login</a> |
+       <a href="/users/register">Register</a>
     {{/if}}
+    </li>
 
 </ul>
 {{{body}}}
+</div>
 </body>
 </html>

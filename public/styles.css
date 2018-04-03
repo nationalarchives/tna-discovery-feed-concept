@@ -3,14 +3,13 @@
 * {
     font-family: "Open Sans", sans-serif;
 }
-
-
-li, .form-department-checkbox {
-    margin-bottom: 1%;
-}
-
 .form-department-checkboxes {
     overflow-y: scroll;
-    max-height:800px;
-    width: 50%;
+    max-height:500px;
+}
+
+.centre-image {
+    display: block;
+    max-width: 50%;
+    margin: 1% auto;
 }
