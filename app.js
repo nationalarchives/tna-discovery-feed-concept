@@ -21,6 +21,10 @@ const data_route = require('./routes/data');
 
 const globals = require('./functions/globals');
 const app = express();
+
+const fetch = require("node-fetch");
+const nodemailer = require("nodemailer");
+
 globals.departments_json = require("./data/departments.json");
 globals.discovery_json = require("./data/discovery.json");
 
@@ -109,7 +113,49 @@ app.listen(app.get('port'), function (error) {
 
 })
 
-const fetch = require("node-fetch");
+// Generate SMTP service account from ethereal.email
+nodemailer.createTestAccount((err, account) => {
+    if (err) {
+        console.error('Failed to create a testing account. ' + err.message);
+        return process.exit(1);
+    }
+
+    console.log('Credentials obtained, sending message...');
+
+    let email_account = require(__dirname + "/email_account.js");
+    console.log(email_account.port);
+    // Create a SMTP transporter object
+    let transporter = nodemailer.createTransport({
+
+        host: email_account.host,
+        port: email_account.port,
+        secure: email_account.secure,
+        auth: {
+            user: email_account.user,
+            pass: email_account.pass
+        }
+    });
+
+    // Message object
+    let message = {
+        from: 'Sender Name <sender@example.com>',
+        to: 'Recipient <recipient@example.com>',
+        subject: 'Nodemailer is unicode friendly ✔',
+        text: 'Hello to myself!',
+        html: '<p><b>Hello</b> to myself!</p>'
+    };
+
+    transporter.sendMail(message, (err, info) => {
+        if (err) {
+            console.log('Error occurred. ' + err.message);
+            return process.exit(1);
+        }
+
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    });
+});
 
 
 function get_JSON_async(url, callback) {
@@ -183,5 +229,59 @@ function filter_JSON_data(the_json) {
     });
 
     return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, records };
+}
+
+const Mongo = require('mongodb');
+const MongoClient = Mongo.MongoClient;
+const url = 'mongodb://localhost:27017/';
+let db, discovery_feed_users = undefined;
+
+MongoClient.connect(url, function (error, client) {
+
+    db = client.db("discovery_feed_login");
+
+    if(error){
+        console.log("Error: " + error);
+    }
+    else {
+      discovery_feed_users = db.collection('users');
+      send_notifications();
+    }
+
+    client.close();
+})
+
+function send_notifications(){
+
+
+    let discovery_json_departments = globals.return_object["departments"];
+    let discovery_extracted_departments = {};
+
+    discovery_json_departments.forEach(function (data) {
+        discovery_extracted_departments[data["code"]] = data["count"];
+    })
+
+    console.log(discovery_extracted_departments);
+
+    discovery_feed_users.find({}).forEach((user) => {
+
+        let users_departments = user["department_subscriptions"];
+
+        Object.keys(users_departments).forEach((key) => {
+
+            if(key in discovery_extracted_departments){
+
+                if(users_departments[key]){
+                    console.log("Key exists, user is subscribed: " + key);
+                }
+                else {
+                    console.log("Key exists, user is NOT subscribed: " + key);
+                }
+
+            }
+
+        });
+
+    })
 }
 
