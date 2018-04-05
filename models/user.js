@@ -22,6 +22,9 @@ var UserSchema = mongoose.Schema({
     },
     department_subscriptions: {
         type: Object
+    },
+    taxonomy_subscriptions: {
+        type: Object
     }
 
 });

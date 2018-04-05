@@ -26,10 +26,11 @@ router.post('/register', [
         let email = req.body.email;
         let username = req.body.username;
         let password = req.body.password;
-        let department_subscriptions = require("../data/empty_subscriptions.json");
+        let department_subscriptions = require("../data/empty_department_subscriptions.json");
+        let taxonomy_subscriptions = require("../data/empty_taxonomy_subscriptions.json");
 
         var newUser = new User( {
-            name, email, username, password, department_subscriptions
+            name, email, username, password, department_subscriptions, taxonomy_subscriptions
         });
 
         User.createUser(newUser, function (error, user) {

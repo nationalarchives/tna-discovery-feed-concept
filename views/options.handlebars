@@ -1,30 +1,65 @@
 <h1>My Subscriptions</h1>
 
-<h2>Department Subscriptions</h2>
-<form action="/feed/subscriptions" method="post">
-    <div class="form-department-checkboxes">
-        <ul>
-            <h3>Subscribed</h3>
-            {{#each subscription}}
-                {{#if this}}
-                    <div class="form-row">
-                        <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
-                               checked/> <strong>{{get_long_department_name @key}}</strong> : subscribed
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <h2>Department Subscriptions</h2>
+                <form action="/feed/subscriptions/departments" method="post">
+                <div class="form-department-checkboxes">
+                    <ul>
+                        <h3>Subscribed</h3>
+                        {{#each subscription}}
+                            {{#if this}}
+                                <div class="form-row">
+                                    <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
+                                           checked/> <strong>{{get_long_department_name @key}}</strong> : subscribed
+                                </div>
+                            {{/if}}
+                        {{/each}}
+                        <hr>
+                        <h3>Not subscribed</h3>
+                        {{#each subscription}}
+                            {{#unless this}}
+                                <div class="form-row">
+                                    <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>  <strong>{{get_long_department_name @key}}</strong> : not subscribed
+                                </div>
+                            {{/unless}}
+                        {{/each}}
+                    </ul>
+                </div>
+                <input type="submit" value="Update Department Subscriptions"/>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Taxonomy Subscriptions</h2>
+                <form action="/feed/subscriptions/taxonomies" method="post">
+                    <div class="form-department-checkboxes">
+                        <ul>
+                            <h3>Subscribed</h3>
+                            {{#each taxonomy}}
+                                {{#if this}}
+                                    <div class="form-row">
+                                        <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
+                                               checked/> <strong>{{@key}}</strong> : subscribed
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+                             <hr>
+                            <h3>Not subscribed</h3>
+                            {{#each taxonomy}}
+                                {{#unless this}}
+                                    <div class="form-row">
+                                        <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>  <strong>{{@key}}</strong> : not subscribed
+                                    </div>
+                                {{/unless}}
+                            {{/each}}
+                        </ul>
                     </div>
-                {{/if}}
-            {{/each}}
-            <hr>
-            <h3>Not subscribed</h3>
-            {{#each subscription}}
-                {{#unless this}}
-                    <div class="form-row">
-                        <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>  <strong>{{get_long_department_name @key}}</strong> : not subscribed
-                    </div>
-                {{/unless}}
-            {{/each}}
-        </ul>
+                    <input type="submit" value="Update Taxonomy Subscriptions"/>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <input type="submit" value="Update Subscriptions"/>
-
-</form>

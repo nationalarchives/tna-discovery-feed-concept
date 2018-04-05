@@ -87,6 +87,43 @@ app.use(function (req, res, next) {
 });
 
 
+nodemailer.createTestAccount((err, account) => {
+    let email_account = require(__dirname + "/email_account.js");
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+
+        host: email_account.host,
+        port:  email_account.port,
+        secure: email_account.secure, // true for 465, false for other ports
+        auth: {
+            user: email_account.user, // generated ethereal user
+            pass: email_account.pass // generated ethereal password
+        }
+    });
+
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"Discovery Feed" <test@localhost>', // sender address
+        to: 'test@localhost', // list of receivers
+        subject: 'Hello ✔', // Subject line
+        text: 'Hello world?', // plain text body
+        html: '<b>Hello world?</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        // Preview only available when sending through an Ethereal account
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    });
+});
+
+
+
 //From these entry point URL's, use the following js files for their routes
 app.use('/', routes);
 app.use('/users', users)
@@ -108,55 +145,10 @@ app.listen(app.get('port'), function (error) {
         setInterval(get_discovery_api, 86400000);*/
 
         globals.return_object = filter_JSON_data(globals.discovery_json);
-
+        globals.next_update = "N/A";
     }
 
 })
-
-// Generate SMTP service account from ethereal.email
-nodemailer.createTestAccount((err, account) => {
-    if (err) {
-        console.error('Failed to create a testing account. ' + err.message);
-        return process.exit(1);
-    }
-
-    console.log('Credentials obtained, sending message...');
-
-    let email_account = require(__dirname + "/email_account.js");
-    console.log(email_account.port);
-    // Create a SMTP transporter object
-    let transporter = nodemailer.createTransport({
-
-        host: email_account.host,
-        port: email_account.port,
-        secure: email_account.secure,
-        auth: {
-            user: email_account.user,
-            pass: email_account.pass
-        }
-    });
-
-    // Message object
-    let message = {
-        from: 'Sender Name <sender@example.com>',
-        to: 'Recipient <recipient@example.com>',
-        subject: 'Nodemailer is unicode friendly ✔',
-        text: 'Hello to myself!',
-        html: '<p><b>Hello</b> to myself!</p>'
-    };
-
-    transporter.sendMail(message, (err, info) => {
-        if (err) {
-            console.log('Error occurred. ' + err.message);
-            return process.exit(1);
-        }
-
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    });
-});
-
 
 function get_JSON_async(url, callback) {
     const get_JSON = async url => {
