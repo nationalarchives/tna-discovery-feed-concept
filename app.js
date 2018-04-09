@@ -24,6 +24,19 @@ const app = express();
 
 const fetch = require("node-fetch");
 const nodemailer = require("nodemailer");
+const email_account = require(__dirname + "/email_account.js");
+
+let transporter = nodemailer.createTransport({
+
+    host: email_account.host,
+    port:  email_account.port,
+    secure: email_account.secure, // true for 465, false for other ports
+    auth: {
+        user: email_account.user, // generated ethereal user
+        pass: email_account.pass // generated ethereal password
+    }
+});
+
 
 globals.departments_json = require("./data/departments.json");
 globals.discovery_json = require("./data/discovery.json");
@@ -85,43 +98,6 @@ app.use(function (req, res, next) {
 
     next();
 });
-
-
-nodemailer.createTestAccount((err, account) => {
-    let email_account = require(__dirname + "/email_account.js");
-
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-
-        host: email_account.host,
-        port:  email_account.port,
-        secure: email_account.secure, // true for 465, false for other ports
-        auth: {
-            user: email_account.user, // generated ethereal user
-            pass: email_account.pass // generated ethereal password
-        }
-    });
-
-    // setup email data with unicode symbols
-    let mailOptions = {
-        from: '"Discovery Feed" <test@localhost>', // sender address
-        to: 'test@localhost', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
-    };
-
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    });
-});
-
 
 
 //From these entry point URL's, use the following js files for their routes
@@ -220,6 +196,8 @@ function filter_JSON_data(the_json) {
 
     });
 
+    console.log(the_json["departments"]);
+
     return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, records };
 }
 
@@ -258,13 +236,14 @@ function send_notifications(){
     discovery_feed_users.find({}).forEach((user) => {
 
         let users_departments = user["department_subscriptions"];
+        let email_data = [];
 
         Object.keys(users_departments).forEach((key) => {
 
             if(key in discovery_extracted_departments){
 
                 if(users_departments[key]){
-                    console.log("Key exists, user is subscribed: " + key);
+                    email_data.push(`${discovery_extracted_departments[key]} records regarding ${key} are now open to the public. <br/>`);
                 }
                 else {
                     console.log("Key exists, user is NOT subscribed: " + key);
@@ -272,7 +251,34 @@ function send_notifications(){
 
             }
 
-        });
+         });
+
+        if(email_data.length > 0){
+
+            let message = '<ul>';
+            email_data.map(function (string) {
+                message += string;
+            });
+            message+= '</ul>';
+
+            // setup email data with unicode symbols
+            let mailOptions = {
+                from: '"Discovery Feed" <test@localhost>', // sender address
+                to: user.email, // list of receivers
+                subject: `Discovery Feed: New updates for ${user.username}`, // Subject line
+                html: message // html body
+            };
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            });
+        }
 
     })
 }
