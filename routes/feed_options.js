@@ -2,7 +2,6 @@ const express = require("express");
 var router = express.Router();
 const globals = require("../functions/globals")
 const User = require('../models/user');
-let error = "";
 
 router.get('/subscriptions', globals.ensure_authenticated, function (req, res) {
     res.render('options', { subscription: req.user.department_subscriptions, taxonomy: req.user.taxonomy_subscriptions});
@@ -15,8 +14,6 @@ router.post('/subscriptions/departments', globals.ensure_authenticated, function
     Object.keys(departments).forEach(function (key) {
         userDepartments[key] = (req.body[key] == 'on');
     })
-
-    let error = "";
 
    User.findOneAndUpdate({"username" : req.user.username}, {department_subscriptions: userDepartments}, {upsert: true}, function (error, doc) {
         console.log("Updated departments, their username is: " + req.user.username);
