@@ -196,9 +196,13 @@ function filter_JSON_data(the_json) {
 
     });
 
-    console.log(the_json["departments"]);
+    let departments = {};
+    the_json["departments"].forEach(function (data) {
+        departments[data["code"]] = data["count"];
+    })
 
-    return { count: the_json["count"], departments: the_json["departments"], taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, records };
+
+    return { count: the_json["count"], departments: departments, taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, records };
 }
 
 const Mongo = require('mongodb');
@@ -225,13 +229,7 @@ function send_notifications(){
 
 
     let discovery_json_departments = globals.return_object["departments"];
-    let discovery_extracted_departments = {};
-
-    discovery_json_departments.forEach(function (data) {
-        discovery_extracted_departments[data["code"]] = data["count"];
-    })
-
-    console.log(discovery_extracted_departments);
+    let discovery_json_records = globals.return_object["records"];
 
     discovery_feed_users.find({}).forEach((user) => {
 
@@ -240,10 +238,10 @@ function send_notifications(){
 
         Object.keys(users_departments).forEach((key) => {
 
-            if(key in discovery_extracted_departments){
+            if(key in discovery_json_departments){
 
                 if(users_departments[key]){
-                    email_data.push(`${discovery_extracted_departments[key]} records regarding ${key} are now open to the public. <br/>`);
+                    email_data.push(`${discovery_json_departments[key]} records regarding ${key} are now open to the public. <br/>`);
                 }
                 else {
                     console.log("Key exists, user is NOT subscribed: " + key);
@@ -252,6 +250,12 @@ function send_notifications(){
             }
 
          });
+
+
+
+        user["keyword_subscriptions"].forEach(function(keyword){
+           console.log(keyword);
+        });
 
         if(email_data.length > 0){
 

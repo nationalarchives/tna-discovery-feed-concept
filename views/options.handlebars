@@ -4,12 +4,13 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
-                <h2>Department Subscriptions</h2>
+            <div class="col-md-4">
+                <h2 id="department-h2">Department Subscriptions</h2>
                 <form action="/feed/subscriptions/departments" method="post">
                 <div class="form-department-checkboxes">
                     <ul>
                         <h3>Subscribed</h3>
+                        <hr />
                         {{#each subscription}}
                             {{#if this}}
                                 <div class="form-row">
@@ -18,8 +19,8 @@
                                 </div>
                             {{/if}}
                         {{/each}}
-                        <hr>
                         <h3>Not subscribed</h3>
+                        <hr />
                         {{#each subscription}}
                             {{#unless this}}
                                 <div class="form-row">
@@ -32,12 +33,13 @@
                 <input type="submit" value="Update Department Subscriptions"/>
                 </form>
             </div>
-            <div class="col-md-6">
-                <h2>Taxonomy Subscriptions</h2>
+            <div class="col-md-4">
+                <h2 id="taxonomy-h2">Taxonomy Subscriptions</h2>
                 <form action="/feed/subscriptions/taxonomies" method="post">
                     <div class="form-department-checkboxes">
                         <ul>
                             <h3>Subscribed</h3>
+                            <hr />
                             {{#each taxonomy}}
                                 {{#if this}}
                                     <div class="form-row">
@@ -46,8 +48,8 @@
                                     </div>
                                 {{/if}}
                             {{/each}}
-                             <hr>
                             <h3>Not subscribed</h3>
+                            <hr />
                             {{#each taxonomy}}
                                 {{#unless this}}
                                     <div class="form-row">
@@ -59,6 +61,27 @@
                     </div>
                     <input type="submit" value="Update Taxonomy Subscriptions"/>
                 </form>
+            </div>
+            <div class="col-md-4">
+                <h2 id="keyword-h2">Keyword Subscriptions</h2>
+                <div class="form-department-checkboxes">
+                <form action="/feed/subscriptions/keywords" method="post">
+                    <div class="form-row">
+                        <label for="keyword">Add new keyword</label>  <input type="text" name="keyword"/>
+                        <input type="submit" value="Add"/>
+                    </div>
+                </form>
+
+                {{#each keyword}}
+                    <form action="/feed/subscriptions/keywords/delete" method="post">
+                        <div class="form-row">
+                                {{this}}
+                            <input type="hidden" value="{{@key}}" name="keyword" />
+                            <input type="submit" value="Delete"/>
+                        </div>
+                    </form>
+                {{/each}}
+            </div>
             </div>
         </div>
     </div>

@@ -25,6 +25,9 @@ var UserSchema = mongoose.Schema({
     },
     taxonomy_subscriptions: {
         type: Object
+    },
+    keyword_subscriptions: {
+        type: Array
     }
 
 });

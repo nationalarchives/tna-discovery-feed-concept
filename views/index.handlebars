@@ -1,29 +1,35 @@
 <div class="row">
 
     <div class="col-md-12">
-    {{#get_feed_info}}
-    {{/get_feed_info}}
+        {{#get_feed_info}}
+        {{/get_feed_info}}
 
-    <h2>Departments</h2>
-    {{#get_departments }}
-    {{/get_departments}}
+        <h2>Departments</h2>
+        <ul>
+            {{#each departments }}
+                <li>
+                    {{#get_long_department_name @key}}
+                    {{/get_long_department_name}}: {{this}}
+                </li>
+            {{/each}}
+        </ul>
 
-    <h2>Places</h2>
-    {{#get_places }}
-    {{/get_places}}
+        <h2>Places</h2>
+        {{#get_places }}
+        {{/get_places}}
 
-    <h2>Taxonomies</h2>
-    {{#get_taxonomies }}
-    {{/get_taxonomies}}
+        <h2>Taxonomies</h2>
+        {{#get_taxonomies }}
+        {{/get_taxonomies}}
 
 
-    <h2>Time periods</h2>
-    {{#get_time_periods }}
-    {{/get_time_periods}}
+        <h2>Time periods</h2>
+        {{#get_time_periods }}
+        {{/get_time_periods}}
 
-    <h2>Record titles</h2>
-    {{#get_record_titles}}
-    {{/get_record_titles}}
+        <h2>Record titles</h2>
+        {{#get_record_titles}}
+        {{/get_record_titles}}
     </div>
 </div>
 

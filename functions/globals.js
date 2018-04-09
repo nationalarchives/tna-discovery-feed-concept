@@ -1,5 +1,6 @@
 module.exports.ensure_authenticated = function (req, res, next) {
-    if(req.connection.remoteAddress != '::1'){
+
+    if(req.connection.remoteAddress != '::1' && req.connection.remoteAddress != '::ffff:127.0.0.1'){
         res.redirect("http://nationalarchives.gov.uk");
     }
     else {
