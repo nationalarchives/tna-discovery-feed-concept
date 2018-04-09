@@ -15,19 +15,9 @@ router.post('/subscriptions/departments', globals.ensure_authenticated, function
         userDepartments[key] = (req.body[key] == 'on');
     })
 
-   User.findOneAndUpdate({"username" : req.user.username}, {department_subscriptions: userDepartments}, {upsert: true}, function (error, doc) {
-        console.log("Updated departments, their username is: " + req.user.username);
 
-       if(!error){
-           req.flash('success_msg', 'Subscriptions updated.');
-       }
-       else {
-           req.flash('error_msg', error);
-       }
+    update_user_data(req, res, {department_subscriptions: userDepartments});
 
-       res.redirect('/feed/subscriptions');
-
-   });
 });
 
 router.post('/subscriptions/taxonomies', globals.ensure_authenticated, function(req, res) {
@@ -38,8 +28,13 @@ router.post('/subscriptions/taxonomies', globals.ensure_authenticated, function(
         userTaxonomies[key] = (req.body[key] == 'on');
     })
 
-    User.findOneAndUpdate({"username" : req.user.username}, {taxonomy_subscriptions: userTaxonomies}, {upsert:true}, function (error, doc) {
+    update_user_data(req, res, {taxonomy_subscriptions: userTaxonomies});
 
+
+});
+
+function update_user_data(req, res, data) {
+    User.findOneAndUpdate({"username" : req.user.username}, data, {upsert: true}, function (error, doc) {
         if(!error){
             req.flash('success_msg', 'Subscriptions updated.');
         }
@@ -48,11 +43,7 @@ router.post('/subscriptions/taxonomies', globals.ensure_authenticated, function(
         }
 
         res.redirect('/feed/subscriptions');
-
-    });
-
-});
-
-
+    })
+}
 
 module.exports = router;
