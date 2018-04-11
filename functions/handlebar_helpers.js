@@ -56,7 +56,7 @@ module.exports = {
     },
     get_feed_info: () => {
         let count = globals.return_object["count"];
-        return `<h1> ${count}  records released in the last 24 hours. </h1> <h4> Next feed update: ${globals.next_update}</h4>`
+        return `<h1> ${count}  records opened in the last 24 hours. </h1> <h4> Next feed update: ${globals.next_update}</h4>`
     },
     get_record_titles: () => {
         let return_data = `<ul>`;
