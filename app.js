@@ -252,11 +252,6 @@ function send_notifications(){
          });
 
 
-
-        user["keyword_subscriptions"].forEach(function(keyword){
-           console.log(keyword);
-        });
-
         if(email_data.length > 0){
 
             let message = '<ul>';
