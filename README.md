@@ -28,16 +28,4 @@ Installation:
 2. Call "npm install" in your terminal  
 3. Call "mongod" in your terminal to run Mongo  
 3. Call "nodemon" in your terminal to run the application on localhost:3000  
-4. Create an email_account.js in the project root. Paste the following and add data to the lets to send emails:  
-
-    let host = 'smtp.example';  
-    let port = 587;  
-    let user = 'example@nationalarchives.gov.uk';  
-    let pass = 'password';  
-    let secure = false; //true for port 465 only  
-          
-    exports.host = host;  
-    exports.port = port;  
-    exports.user = user;  
-    exports.pass = pass;  
-    exports.secure = secure;
+4. Download FakeSMTP and listen on port 465 to view sent emails
