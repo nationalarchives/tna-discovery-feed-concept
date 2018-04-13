@@ -8,26 +8,7 @@
 </head>
 <body>
 <div class="container">
-{{#if success_msg}}
-    <div class="" role="alert">{{success_msg}}</div>
-{{/if}}
-
-{{#if error_msg}}
-    <div class="emphasis-block error-message" role="alert">
-        <p class="h3">Sorry, there was a problem</p>
-        <p>{{error_msg}}</p></div>
-        <p>{{error}}</p></div>
-{{/if}}
-
-{{#if error}}
-    <div class="emphasis-block error-message" role="alert">
-        <p class="h3">Sorry, there was a problem</p>
-        <p>{{error}}</p>
-    </div>
-{{/if}}
-
-<img src="/tna-logo.png" class="center-logo">
-
+    <img src="/tna-logo.png" class="center-logo">
 <ul>
     <li>
        {{#if user}}
@@ -40,6 +21,29 @@
     </li>
 
 </ul>
+
+
+
+{{#if success_msg}}
+        <div role="alert">{{success_msg}}</div>
+{{/if}}
+
+{{#if error_msg}}
+        <div class="emphasis-block error-message" role="alert">
+            <p class="h3">Sorry, there was a problem</p>
+            <p>{{error_msg}}</p></div>
+        <p>{{error}}</p></div>
+{{/if}}
+
+{{#if error}}
+    <div class="emphasis-block error-message" role="alert">
+        <p class="h3">Sorry, there was a problem</p>
+        <p>{{error}}</p>
+    </div>
+{{/if}}
+
+
+
 {{{body}}}
 </div>
 
