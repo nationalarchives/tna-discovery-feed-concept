@@ -8,10 +8,28 @@
     overflow-y: scroll;
     max-height:500px;
     background-color: white;
+    margin-bottom: 5%;
 }
 
-.centre-image {
+#keyword-box {
+    height:500px;
+    background-color: white;
+    margin-bottom: 5%;
+    padding:5%;
+}
+
+.center-logo {
     display: block;
-    max-width: 50%;
+    max-width: 570px;
     margin: 1% auto;
+}
+
+.record-titles-overflow {
+    overflow-y: scroll;
+    max-height: 700px;
+    margin-bottom: 5%;
+}
+
+footer {
+    margin-top: 1%;
 }

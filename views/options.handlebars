@@ -1,88 +1,91 @@
 <h1>My Subscriptions</h1>
 
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <h2 id="department-h2">Department Subscriptions</h2>
-                <form action="/feed/subscriptions/departments" method="post">
+You will receive daily emails if any newly opened records match your subscription criteria.
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <h2 id="department-h2">Department Subscriptions</h2>
+            <form action="/feed/subscriptions/departments" method="post">
                 <div class="form-department-checkboxes">
                     <ul>
                         <h3>Subscribed</h3>
-                        <hr />
+                        <hr/>
                         {{#each subscription}}
                             {{#if this}}
                                 <div class="form-row">
                                     <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
-                                           checked/> <strong>{{get_long_department_name @key}}</strong> : subscribed
+                                           checked/> <strong>{{get_long_department_name @key}}</strong>
                                 </div>
                             {{/if}}
                         {{/each}}
                         <h3>Not subscribed</h3>
-                        <hr />
+                        <hr/>
                         {{#each subscription}}
                             {{#unless this}}
                                 <div class="form-row">
-                                    <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>  <strong>{{get_long_department_name @key}}</strong> : not subscribed
+                                    <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>
+                                    {{get_long_department_name @key}}
                                 </div>
                             {{/unless}}
                         {{/each}}
                     </ul>
                 </div>
                 <input type="submit" value="Update Department Subscriptions"/>
-                </form>
-            </div>
-            <div class="col-md-4">
-                <h2 id="taxonomy-h2">Taxonomy Subscriptions</h2>
-                <form action="/feed/subscriptions/taxonomies" method="post">
-                    <div class="form-department-checkboxes">
-                        <ul>
-                            <h3>Subscribed</h3>
-                            <hr />
-                            {{#each taxonomy}}
-                                {{#if this}}
-                                    <div class="form-row">
-                                        <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
-                                               checked/> <strong>{{@key}}</strong> : subscribed
-                                    </div>
-                                {{/if}}
-                            {{/each}}
-                            <h3>Not subscribed</h3>
-                            <hr />
-                            {{#each taxonomy}}
-                                {{#unless this}}
-                                    <div class="form-row">
-                                        <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>  <strong>{{@key}}</strong> : not subscribed
-                                    </div>
-                                {{/unless}}
-                            {{/each}}
-                        </ul>
-                    </div>
-                    <input type="submit" value="Update Taxonomy Subscriptions"/>
-                </form>
-            </div>
-            <div class="col-md-4">
-                <h2 id="keyword-h2">Keyword Subscriptions</h2>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h2 id="taxonomy-h2">Taxonomy Subscriptions</h2>
+            <form action="/feed/subscriptions/taxonomies" method="post">
                 <div class="form-department-checkboxes">
-                <form action="/feed/subscriptions/keywords" method="post">
-                    <div class="form-row">
-                        <label for="keyword">Add new keyword</label>  <input type="text" name="keyword"/>
-                        <input type="submit" value="Add"/>
-                    </div>
-                </form>
+                    <ul>
+                        <h3>Subscribed</h3>
+                        <hr/>
+                        {{#each taxonomy}}
+                            {{#if this}}
+                                <div class="form-row">
+                                    <input type="checkbox" class="checkbox-subscribed" name="{{@key}}"
+                                           checked/> <strong>{{@key}}</strong>
+                                </div>
+                            {{/if}}
+                        {{/each}}
+                        <h3>Not subscribed</h3>
+                        <hr/>
+                        {{#each taxonomy}}
+                            {{#unless this}}
+                                <div class="form-row">
+                                    <input type="checkbox" class="checkbox-unsubscribed" name="{{@key}}"/>
+                                    {{@key}}
+                                </div>
+                            {{/unless}}
+                        {{/each}}
+                    </ul>
+                </div>
+                <input type="submit" value="Update Taxonomy Subscriptions"/>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h2 id="keyword-h2">Keyword Subscriptions</h2>
+            <div id="keyword-box">
 
                 {{#each keyword}}
                     <form action="/feed/subscriptions/keywords/delete" method="post">
                         <div class="form-row">
-                                {{this}}
-                            <input type="hidden" value="{{@key}}" name="keyword" />
+                            <strong>{{this}}</strong>
+                            <input type="hidden" value="{{@key}}" name="keyword"/>
                             <input type="submit" value="Delete"/>
                         </div>
                     </form>
                 {{/each}}
             </div>
-            </div>
+            <form action="/feed/subscriptions/keywords" method="post">
+                <div class="form-row">
+                    <label for="keyword">Add new keyword</label> <input type="text" name="keyword" maxlength="50"/>
+                    <input type="submit" value="Add"/>
+                </div>
+            </form>
         </div>
+
     </div>
+
+</div>
 
