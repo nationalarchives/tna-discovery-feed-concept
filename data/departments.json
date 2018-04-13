@@ -1,5 +1,4 @@
 {
-  "departments" : {
     "WO":" War Office, Armed Forces, Judge Advocate General, and related bodies " ,
     "BT":" Board of Trade and successors " ,
     "ADM":" Admiralty, Navy, Royal Marines, and Coastguard " ,
@@ -100,5 +99,4 @@
     "BL":" Council on Tribunals and successors " ,
     "UGC":" Higher Education Funding Council for England " ,
     "MFQ":" Maps and plans extracted to flat storage from various departments held at the Public Record Office, Kew "
-  }
 }

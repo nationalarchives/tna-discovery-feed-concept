@@ -66,8 +66,8 @@ module.exports = {
         }
         return return_data + "</ul>";
     },
-    get_long_department_name: (key) => {
-       return globals.departments_json["departments"][key];
+    get_long_department_name: key => {
+       return globals.departments_json[key];
     }
 
 }

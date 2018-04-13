@@ -16,7 +16,6 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.16.3",
     "express-handlebars": "*",
-    "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
     "mongodb": "^3.0.4",

@@ -14,7 +14,7 @@ const passport = require("passport");
 
 // END Login dependencies
 
-const routes = require('./routes/index');
+const index = require('./routes/index');
 const users = require('./routes/users');
 const feed_options = require('./routes/feed_options');
 const data_route = require('./routes/data');
@@ -101,7 +101,7 @@ app.use(function (req, res, next) {
 
 
 //From these entry point URL's, use the following js files for their routes
-app.use('/', routes);
+app.use('/', index);
 app.use('/users', users)
 app.use('/feed', feed_options)
 app.use('/data', data_route);
@@ -230,10 +230,15 @@ function send_notifications(){
 
     let discovery_json_departments = globals.return_object["departments"];
     let discovery_json_records = globals.return_object["records"];
+    let discovery_department_fullnames = globals.departments_json;
+
+
 
     discovery_feed_users.find({}).forEach((user) => {
 
         let users_departments = user["department_subscriptions"];
+        let users_keywords = user["keyword_subscriptions"];
+
         let email_data = [];
 
         Object.keys(users_departments).forEach((key) => {
@@ -241,10 +246,7 @@ function send_notifications(){
             if(key in discovery_json_departments){
 
                 if(users_departments[key]){
-                    email_data.push(`${discovery_json_departments[key]} records regarding ${key} are now open to the public. <br/>`);
-                }
-                else {
-                    console.log("Key exists, user is NOT subscribed: " + key);
+                    email_data.push(`${discovery_json_departments[key]} records regarding the ${discovery_department_fullnames[key]}.`);
                 }
 
             }
@@ -252,11 +254,38 @@ function send_notifications(){
          });
 
 
-        if(email_data.length > 0){
+        let user_keyword_tracker = {}
 
-            let message = '<ul>';
+        for (let record in discovery_json_records) {
+            let title = discovery_json_records[record]["title"];
+            let description = discovery_json_records[record]["description"];
+
+            users_keywords.forEach(function (data) {
+                if(description.includes(data) || title.includes(data)){
+
+                    if(!(data in user_keyword_tracker)){
+                        user_keyword_tracker[data] = {};
+                        user_keyword_tracker[data]["count"] = 0;
+                        user_keyword_tracker[data]["titles"] = [];
+                    }
+
+                    user_keyword_tracker[data]["count"]++;
+                    user_keyword_tracker[data]["titles"].push(`${title} <ul><li>${description}</li></ul>`);
+                }
+            });
+        }
+
+        Object.keys(user_keyword_tracker).forEach(function (keyword) {
+            email_data.push(`${user_keyword_tracker[keyword]["count"]} keyword matches for your keyword, "${keyword}".`);
+        })
+
+
+        if(email_data.length > 1){
+            let message = `Hello, ${user.name}. Here are the latest record openings you are subscribed to:`;
+
+            message += '<ul>';
             email_data.map(function (string) {
-                message += string;
+                message += `<li>${string}</li>`;
             });
             message+= '</ul>';
 
