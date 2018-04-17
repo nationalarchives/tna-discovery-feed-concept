@@ -6,20 +6,20 @@ $(() =>{
 });
 
 
-function enable_search(search_box, div_to_showhide, div_text_element) {
+function enable_search(search_box, div_to_showhide, element_to_filter) {
     $(search_box).on('keyup', () => {
 
         let searchText = $(search_box).val().toLowerCase();
         let rows = $(div_to_showhide);
 
         $.each(rows, (index) => {
-            let department_name = $(rows[index]).find(div_text_element).text().toLowerCase();
+            let department_name = $(rows[index]).find(element_to_filter).text().toLowerCase();
 
             if(department_name.indexOf(searchText) > -1){
-                $(rows[index]).fadeIn();
+                $(rows[index]).show();
             }
             else {
-                $(rows[index]).fadeOut();
+                $(rows[index]).hide();
             }
         });
 
