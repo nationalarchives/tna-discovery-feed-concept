@@ -2,7 +2,6 @@ $(() =>{
         enable_search('#department-search','#department-ul .form-row','.department-name');
         enable_search('#taxonomy-search','#taxonomy-ul .form-row','.taxonomy-name');
         enable_search('#keyword-search','#keyword-box .form-row','.keyword-name');
-
 });
 
 

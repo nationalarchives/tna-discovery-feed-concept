@@ -110,7 +110,7 @@ app.set('port', 3000);
 
 app.listen(app.get('port'), function (error) {
     if(error){
-        console.log(error)
+        handle_error(error);
     }
     else {
         console.log("Server started")
@@ -125,6 +125,10 @@ app.listen(app.get('port'), function (error) {
     }
 
 })
+
+function handle_error(error) {
+    console.log(error);
+}
 
 function get_JSON_async(url, callback) {
     const get_JSON = async url => {
@@ -158,7 +162,7 @@ function get_discovery_api() {
 
     get_JSON_async(url, function (error, return_json) {
         if(error){
-            console.log("API Error: " + error);
+            handle_error(error);
         }
         else {
             globals.return_object = filter_JSON_data(return_json);
@@ -215,7 +219,7 @@ MongoClient.connect(url, function (error, client) {
     db = client.db("discovery_feed_login");
 
     if(error){
-        console.log("Error: " + error);
+       handle_error(error);
     }
     else {
       discovery_feed_users = db.collection('users');
@@ -257,10 +261,12 @@ function send_notifications(){
         let user_keyword_tracker = {}
 
         for (let record in discovery_json_records) {
-            let title = discovery_json_records[record]["title"];
-            let description = discovery_json_records[record]["description"];
+            let title = discovery_json_records[record]["title"].toLowerCase();
+            let description = discovery_json_records[record]["description"].toLowerCase();
 
             users_keywords.forEach(function (data) {
+                data = data.toLowerCase();
+
                 if(description.includes(data) || title.includes(data)){
 
                     if(!(data in user_keyword_tracker)){
@@ -279,7 +285,6 @@ function send_notifications(){
             email_data.push(`${user_keyword_tracker[keyword]["count"]} keyword matches for your keyword, "${keyword}".`);
         })
 
-
         if(email_data.length > 1){
             let message = `Hello, ${user.name}. Here are the latest record openings you are subscribed to:`;
 
@@ -289,7 +294,6 @@ function send_notifications(){
             });
             message+= '</ul>';
 
-            // setup email data with unicode symbols
             let mailOptions = {
                 from: '"Discovery Feed" <test@localhost>', // sender address
                 to: user.email, // list of receivers
@@ -297,10 +301,9 @@ function send_notifications(){
                 html: message // html body
             };
 
-            // send mail with defined transport object
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    return console.log(error);
+                    handle_error(error);
                 }
                 console.log('Message sent: %s', info.messageId);
                 // Preview only available when sending through an Ethereal account
