@@ -205,7 +205,6 @@ function filter_JSON_data(the_json) {
         departments[data["code"]] = data["count"];
     })
 
-
     return { count: the_json["count"], departments: departments, taxonomies: the_json["taxonomySubjects"], time_periods: the_json["timePeriods"], places, records };
 }
 
@@ -231,12 +230,9 @@ MongoClient.connect(url, function (error, client) {
 
 function send_notifications(){
 
-
     let discovery_json_departments = globals.return_object["departments"];
     let discovery_json_records = globals.return_object["records"];
     let discovery_department_fullnames = globals.departments_json;
-
-
 
     discovery_feed_users.find({}).forEach((user) => {
 
@@ -303,7 +299,7 @@ function send_notifications(){
 
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    handle_error(error);
+                   return handle_error(error);
                 }
                 console.log('Message sent: %s', info.messageId);
                 // Preview only available when sending through an Ethereal account

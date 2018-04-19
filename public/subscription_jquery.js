@@ -12,9 +12,9 @@ function enable_search(search_box, div_to_showhide, element_to_filter) {
         let rows = $(div_to_showhide);
 
         $.each(rows, (index) => {
-            let department_name = $(rows[index]).find(element_to_filter).text().toLowerCase();
+            let element = $(rows[index]).find(element_to_filter).text().toLowerCase();
 
-            if(department_name.indexOf(searchText) > -1){
+            if(element.indexOf(searchText) > -1){
                 $(rows[index]).show();
             }
             else {
