@@ -21,6 +21,7 @@
     "mongodb": "^3.0.4",
     "mongoose": "*",
     "node-fetch": "^2.1.1",
+    "node-qunit": "^1.0.0",
     "nodemailer": "^4.6.4",
     "npm": "^5.8.0",
     "passport": "*",

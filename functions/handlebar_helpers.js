@@ -36,7 +36,7 @@ module.exports = {
         else {
             return_data += `<li> None of the documents contain semantics on places. </li>`;
         }
-        return return_data + "</ul>";
+        return `${return_data} </ul>`;
     },
     get_taxonomies: () => {
         let taxonomies = globals.return_object["taxonomies"];
@@ -44,7 +44,7 @@ module.exports = {
         for(let taxonomy in taxonomies){
            return_data += `<li> ${taxonomies[taxonomy]["code"]} : ${taxonomies[taxonomy]["count"]} </li>`;
         }
-        return return_data + "</ul>";
+        return `${return_data} </ul>`;
     },
     get_time_periods: () => {
         let time_periods = globals.return_object["time_periods"];
@@ -52,11 +52,11 @@ module.exports = {
         for(let time_period in time_periods){
             return_data += `<li> ${time_periods[time_period]["code"]} : ${time_periods[time_period]["count"]}`
         }
-        return return_data + "</ul>";
+        return `${return_data} </ul>`;
     },
     get_feed_info: () => {
         let count = globals.return_object["count"];
-        return `<h1> ${count}  records opened in the last 24 hours. </h1> <h4> Next feed update: ${globals.next_update}</h4>`
+        return `<a href="#"><h1 id="opened-records-count"> ${count}  records opened in the last 24 hours.</h1></a>`
     },
     get_record_titles: () => {
         let return_data = `<ul>`;
@@ -64,7 +64,7 @@ module.exports = {
         for(let record in records) {
             return_data += `<li>${records[record]["description"]} <ul><li>${records[record]["context"]}</li></ul> </li>`;
         }
-        return return_data + "</ul>";
+        return `${return_data} </ul>`;
     },
     get_long_department_name: key => {
        return globals.departments_json[key];
