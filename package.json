@@ -20,6 +20,7 @@
     "express-validator": "*",
     "mongodb": "^3.0.4",
     "mongoose": "*",
+    "mssql": "^4.1.0",
     "node-fetch": "^2.1.1",
     "node-qunit": "^1.0.0",
     "nodemailer": "^4.6.4",

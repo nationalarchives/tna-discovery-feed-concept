@@ -56,7 +56,7 @@ module.exports = {
     },
     get_feed_info: () => {
         let count = globals.return_object["count"];
-        return `<a href="#"><h1 id="opened-records-count"> ${count}  records opened in the last 24 hours.</h1></a>`
+        return `<h1> ${count}  records opened in the last 24 hours.</h1>`
     },
     get_record_titles: () => {
         let return_data = `<ul>`;
@@ -68,6 +68,20 @@ module.exports = {
     },
     get_long_department_name: key => {
        return globals.departments_json[key];
+    },
+    get_updated_records_info: () => {
+    return `<h1>${globals.updated_records_amount} records released in the last week.</h1>`;
+    },
+    get_updated_records: () => {
+        let return_data = '<ul>'
+        let records = globals.updated_records;
+
+      for(let record_id in globals.updated_records){
+
+          return_data += `<li><a href="http://discovery.nationalarchives.gov.uk/details/r/${record_id}" target="_blank">${records[record_id]}</a></li>`;
+      }
+
+      return `${return_data} </ul>`
     }
 
 }

@@ -25,6 +25,7 @@ const app = express();
 const fetch = require("node-fetch");
 const nodemailer = require("nodemailer");
 const email_account = require("./email_account.js");
+const db_config = require("./db_config.js");
 const tests = require("./tests");
 
 
@@ -42,6 +43,8 @@ let transporter = nodemailer.createTransport({
 
 globals.departments_json = require("./data/departments.json");
 globals.discovery_json = require("./data/discovery.json");
+globals.updated_records = require("./data/updated_records.json");
+globals.updated_records_amount = 12192;
 
 // view engine
 app.set('views', __dirname + '/views');
@@ -133,14 +136,46 @@ app.listen(app.get('port'), function (error) {
 
     }
 
+   // connect_to_mssql();
+
 })
+
+const sql = require('mssql');
+
+async function connect_to_mssql () {
+    try {
+
+        const pool = await sql.connect(`mssql://${db_config.user}:${db_config.pass}@${db_config.server}/${db_config.db}`)
+        const amount = await sql.query`select * from MongoUpdates`;
+        const result = await sql.query`select top 100 * from MongoUpdates`;
+        globals.updated_records_amount = amount["recordset"].length;
+
+        let updated_records = {};
+
+        await Promise.all(result["recordset"].map( async (updateDetail) => {
+            let IAID = updateDetail["IAID"];
+
+            const http_response = await fetch("http://discovery.nationalarchives.gov.uk/API/records/v1/details/C" + IAID);
+            const record = await http_response.json();
+            updated_records["C"+IAID] = record["scopeContent"]["description"];
+
+           }));
+
+        console.log(updated_records);
+        globals.updated_records = updated_records;
+
+    } catch (err) {
+        console.log(err);
+
+    }
+}
 
 function handle_error(error) {
     console.log(error);
 }
 
 async function get_JSON_async(url, callback) {
-    const get_JSON = async url => {
+
         try {
             const http_response = await fetch(url);
             const return_json = await http_response.json();
@@ -150,8 +185,7 @@ async function get_JSON_async(url, callback) {
         catch (error) {
             return callback(error, null);
         }
-    }
-    get_JSON(url);
+
 }
 
 function get_discovery_api() {
@@ -248,6 +282,7 @@ MongoClient.connect(url, function (error, client) {
 
     client.close();
 })
+
 
 async function send_notifications() {
 
