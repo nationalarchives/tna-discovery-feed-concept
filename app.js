@@ -234,7 +234,6 @@ function filter_JSON_data(the_json) {
 
     the_json["records"].forEach(function (data) {
 
-
         records[Object.keys(records).length] = {
             title: data.title,
             description: data.description,
@@ -242,8 +241,7 @@ function filter_JSON_data(the_json) {
         };
 
         data["places"].forEach(function (place) {
-
-            // Some entries have are just whitespace, so check if the string still exists after trimmed.
+            // Some entries have are whitespace, so check if the string still exists after trimmed.
             if (place.trim()) {
 
                 // If place already exists in object, increment by 1, else add it to the object with value of 1.
