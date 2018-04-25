@@ -43,6 +43,8 @@ let transporter = nodemailer.createTransport({
 
 globals.departments_json = require("./data/departments.json");
 globals.discovery_json = require("./data/discovery.json");
+
+// Prevent requesting Discovery API on every run...
 globals.updated_records = require("./data/updated_records.json");
 globals.updated_records_amount = 12192;
 
@@ -136,37 +138,46 @@ app.listen(app.get('port'), function (error) {
 
     }
 
-   // connect_to_mssql();
+  // connect_to_mssql();
 
 })
 
 const sql = require('mssql');
 
-async function connect_to_mssql () {
+async function connect_to_mssql() {
     try {
 
-        const pool = await sql.connect(`mssql://${db_config.user}:${db_config.pass}@${db_config.server}/${db_config.db}`)
-        const amount = await sql.query`select * from MongoUpdates`;
-        const result = await sql.query`select top 100 * from MongoUpdates`;
-        globals.updated_records_amount = amount["recordset"].length;
+        await sql.connect(`mssql://${db_config.user}:${db_config.pass}@${db_config.server}/${db_config.db}`);
+        const all_collection_records = await sql.query`select * from MongoUpdates`;
+        const all_d_records = await sql.query`select * from MongoUpdatesDol`;
+
+        const collection_records_sample = await sql.query`select top 1 * from MongoUpdates`;
+        const d_records_sample = await sql.query`select top 1 * from MongoUpdatesDol`;
+
+        globals.updated_records_amount = all_collection_records["recordset"].length + all_d_records["recordset"].length;
 
         let updated_records = {};
 
-        await Promise.all(result["recordset"].map( async (updateDetail) => {
-            let IAID = updateDetail["IAID"];
+        await Promise.all(d_records_sample["recordset"].map( async (current_database_row) => {
+            let IAID = current_database_row["IAID"];
+            await get_JSON_async("http://discovery.nationalarchives.gov.uk/API/records/v1/details/D" + IAID, (error, record) => {
+                updated_records["D"+IAID] = record["scopeContent"]["description"];
+            });
+        }));
 
-            const http_response = await fetch("http://discovery.nationalarchives.gov.uk/API/records/v1/details/C" + IAID);
-            const record = await http_response.json();
-            updated_records["C"+IAID] = record["scopeContent"]["description"];
+        await Promise.all(collection_records_sample["recordset"].map( async (current_database_row) => {
+            let IAID = current_database_row["IAID"];
+
+            await get_JSON_async("http://discovery.nationalarchives.gov.uk/API/records/v1/details/C" + IAID, (error, record) => {
+                updated_records["C"+IAID] = record["scopeContent"]["description"];
+            })
 
            }));
 
-        console.log(updated_records);
         globals.updated_records = updated_records;
 
     } catch (err) {
         console.log(err);
-
     }
 }
 
@@ -179,7 +190,7 @@ async function get_JSON_async(url, callback) {
         try {
             const http_response = await fetch(url);
             const return_json = await http_response.json();
-            assert.ok(typeof return_json === 'object');
+            tests.is_JSON(return_json);
             return callback(null, return_json);
         }
         catch (error) {
@@ -188,7 +199,7 @@ async function get_JSON_async(url, callback) {
 
 }
 
-function get_discovery_api() {
+async function get_discovery_api() {
 
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -204,7 +215,7 @@ function get_discovery_api() {
 
     const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`
 
-    get_JSON_async(url, function (error, return_json) {
+    await get_JSON_async(url, function (error, return_json) {
         if (error) {
             handle_error(error);
         }

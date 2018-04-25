@@ -19,13 +19,18 @@ Current technologies:
 * express-session  
 * nodemon - auto reload the server after code changes  
 * nodemailer - send emails to users  
+* mssql - connects to a mssql database to pull record updates
   
 
 Installation:  
 
-  
 1. Install NodeJS and MongoDB  
 2. Call "npm install" in your terminal  
 3. Call "mongod" in your terminal to run Mongo  
 3. Call "nodemon" in your terminal to run the application on localhost:3000  
 4. Download FakeSMTP and listen on port 465 to view sent emails
+5. Download and install MSSQLExpress or MSSQL Developer.
+6. Download Microsoft SQL Server Management Studio.
+7. Open SQL Server Management Studio and connect to your server.
+8. Enable TCP on the server
+6. Create a database called DiscoveryDB

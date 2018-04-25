@@ -29,7 +29,7 @@
                 {{/get_time_periods}}
 
                 <h2>Record titles</h2>
-                <div class="record-titles-overflow">
+                <div id="record-openings-overflow">
                     {{#get_record_titles}}
                     {{/get_record_titles}}
                 </div>
@@ -41,8 +41,10 @@
             {{/get_updated_records_info}}
 
             <h2>Record titles</h2>
-            {{#get_updated_records}}
-            {{/get_updated_records}}
+            <div id="record-updates-overflow">
+                {{#get_updated_records}}
+                {{/get_updated_records}}
+            </div>
         </div>
     </div>
 </div>

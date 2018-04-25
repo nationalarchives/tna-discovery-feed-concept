@@ -24,9 +24,15 @@
     margin: 1% auto;
 }
 
-.record-titles-overflow {
+#record-openings-overflow {
     overflow-y: scroll;
     max-height: 700px;
+    margin-bottom: 5%;
+}
+
+#record-updates-overflow {
+    overflow-y: scroll;
+    max-height: 1000px;
     margin-bottom: 5%;
 }
 

@@ -70,7 +70,7 @@ module.exports = {
        return globals.departments_json[key];
     },
     get_updated_records_info: () => {
-    return `<h1>${globals.updated_records_amount} records released in the last week.</h1>`;
+    return `<h1>${globals.updated_records_amount} records updated in the last week.</h1>`;
     },
     get_updated_records: () => {
         let return_data = '<ul>'
