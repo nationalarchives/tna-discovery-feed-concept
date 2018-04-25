@@ -78,7 +78,10 @@ module.exports = {
 
       for(let record_id in globals.updated_records){
 
-          return_data += `<li><a href="http://discovery.nationalarchives.gov.uk/details/r/${record_id}" target="_blank">${records[record_id]}</a></li>`;
+          return_data += `<li>
+                                <a href="http://discovery.nationalarchives.gov.uk/details/r/${record_id}" target="_blank">${records[record_id]["record"]}</a>
+                                <ul><li>${records[record_id]["department"]}</li></ul>
+                          </li>`;
       }
 
       return `${return_data} </ul>`

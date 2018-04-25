@@ -138,7 +138,7 @@ app.listen(app.get('port'), function (error) {
 
     }
 
-  // connect_to_mssql();
+    // connect_to_mssql();
 
 })
 
@@ -151,29 +151,39 @@ async function connect_to_mssql() {
         const all_collection_records = await sql.query`select * from MongoUpdates`;
         const all_d_records = await sql.query`select * from MongoUpdatesDol`;
 
-        const collection_records_sample = await sql.query`select top 1 * from MongoUpdates`;
-        const d_records_sample = await sql.query`select top 1 * from MongoUpdatesDol`;
+        const collection_records_sample = await sql.query`select top 100 * from MongoUpdates`;
+        const d_records_sample = await sql.query`select top 100 * from MongoUpdatesDol`;
 
         globals.updated_records_amount = all_collection_records["recordset"].length + all_d_records["recordset"].length;
 
         let updated_records = {};
 
-        await Promise.all(d_records_sample["recordset"].map( async (current_database_row) => {
+        await Promise.all(d_records_sample["recordset"].map(async (current_database_row) => {
             let IAID = current_database_row["IAID"];
+
             await get_JSON_async("http://discovery.nationalarchives.gov.uk/API/records/v1/details/D" + IAID, (error, record) => {
-                updated_records["D"+IAID] = record["scopeContent"]["description"];
+                updated_records["D" + IAID] = {};
+                updated_records["D" + IAID]["record"] = record["scopeContent"]["description"];
+
+                let citable_reference = record["citableReference"].split(' ');
+                updated_records["D" + IAID]["department"] = citable_reference[0];
             });
         }));
 
-        await Promise.all(collection_records_sample["recordset"].map( async (current_database_row) => {
+        await Promise.all(collection_records_sample["recordset"].map(async (current_database_row) => {
             let IAID = current_database_row["IAID"];
 
             await get_JSON_async("http://discovery.nationalarchives.gov.uk/API/records/v1/details/C" + IAID, (error, record) => {
-                updated_records["C"+IAID] = record["scopeContent"]["description"];
-            })
+                updated_records["C" + IAID] = {};
+                updated_records["C" + IAID]["record"] = record["scopeContent"]["description"];
 
-           }));
+                let citable_reference = record["citableReference"].split(' ');
+                updated_records["C" + IAID]["department"] = citable_reference[0];
+            });
 
+        }));
+
+        console.log(updated_records);
         globals.updated_records = updated_records;
 
     } catch (err) {
@@ -187,15 +197,15 @@ function handle_error(error) {
 
 async function get_JSON_async(url, callback) {
 
-        try {
-            const http_response = await fetch(url);
-            const return_json = await http_response.json();
-            tests.is_JSON(return_json);
-            return callback(null, return_json);
-        }
-        catch (error) {
-            return callback(error, null);
-        }
+    try {
+        const http_response = await fetch(url);
+        const return_json = await http_response.json();
+        tests.is_JSON(return_json);
+        return callback(null, return_json);
+    }
+    catch (error) {
+        return callback(error, null);
+    }
 
 }
 
@@ -308,19 +318,19 @@ async function send_notifications() {
 
         let email_data = [];
 
-            Object.keys(users_departments).forEach((department_abbreviation) => {
+        Object.keys(users_departments).forEach((department_abbreviation) => {
 
-                if (discovery_json_records_count > 0) {
+            if (discovery_json_records_count > 0) {
 
-                    if (department_abbreviation in discovery_json_departments) {
+                if (department_abbreviation in discovery_json_departments) {
 
-                        if (users_departments[department_abbreviation]) {
-                            // Example output: "11 records regarding the War Office."
-                            email_data.push(`${discovery_json_departments[department_abbreviation]} records regarding the ${discovery_department_fullnames[department_abbreviation]}.`);
-                        }
+                    if (users_departments[department_abbreviation]) {
+                        // Example output: "11 records regarding the War Office."
+                        email_data.push(`${discovery_json_departments[department_abbreviation]} records regarding the ${discovery_department_fullnames[department_abbreviation]}.`);
                     }
                 }
-            });
+            }
+        });
 
         // Track records that match the users keywords
         let user_keyword_tracker = {}
@@ -352,11 +362,9 @@ async function send_notifications() {
 
         });
 
-
-
         Object.keys(user_keyword_tracker).forEach(function (keyword) {
             email_data.push(`${user_keyword_tracker[keyword]["count"]} keyword matches for your keyword, "${keyword}".`);
-        })
+        });
 
         if (email_data.length > 1) {
             let message = `Hello, ${user.name}. Here are the latest record openings you are subscribed to:`;
