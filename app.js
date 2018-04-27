@@ -19,14 +19,18 @@ const users = require('./routes/users');
 const feed_options = require('./routes/feed_options');
 const data_route = require('./routes/data');
 
+// Store variables & functions that need to be accessed by all JS files
 const globals = require('./functions/globals');
+
 const app = express();
 
 const fetch = require("node-fetch");
 const nodemailer = require("nodemailer");
+const tests = require("./tests");
+
+//Config files not pushed to GitHub for security
 const email_account = require("./email_account.js");
 const db_config = require("./db_config.js");
-const tests = require("./tests");
 
 
 let transporter = nodemailer.createTransport({
@@ -40,12 +44,13 @@ let transporter = nodemailer.createTransport({
     }
 });
 
+//Get full names of departments from their abbreviation
+globals.department_full_names = require("./data/department_full_names.json");
 
-globals.departments_json = require("./data/departments.json");
+// Prevent requesting Discovery API on every run while testing by creating offline copies of previously made requests.
 globals.discovery_json = require("./data/discovery.json");
-
-// Prevent requesting Discovery API on every run...
 globals.updated_records = require("./data/updated_records.json");
+globals.updated_record_departments = require("./data/updated_record_departments.json");
 globals.updated_records_amount = 12192;
 
 // view engine
@@ -71,9 +76,11 @@ app.use(session({
     resave: true
 }));
 
+// Enable passport functions
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Enable validation
 app.use(express_validator({
     errorFormatter: function (param, msg, value) {
         var namespace = param.split('.'),
@@ -95,6 +102,7 @@ app.use(express_validator({
 // Connect Flash
 app.use(flash());
 
+// Local variables available to the HTTP response;
 app.use(function (req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -112,13 +120,11 @@ app.use(function (req, res, next) {
 
 //From these entry point URL's, use the following js files for their routes
 app.use('/', index);
-app.use('/users', users)
-app.use('/feed', feed_options)
+app.use('/users', users);
+app.use('/feed', feed_options);
 app.use('/data', data_route);
 
-app.set('port', 3000);
-
-app.listen(app.get('port'), function (error) {
+app.listen(3000, function (error) {
     if (error) {
         handle_error(error);
     }
@@ -138,25 +144,26 @@ app.listen(app.get('port'), function (error) {
 
     }
 
-   // connect_to_mssql();
+   // get_record_updates_MSSQL();
 
 })
 
 const sql = require('mssql');
 
-async function connect_to_mssql() {
+async function get_record_updates_MSSQL() {
     try {
 
         await sql.connect(`mssql://${db_config.user}:${db_config.pass}@${db_config.server}/${db_config.db}`);
         const all_collection_records = await sql.query`select * from MongoUpdates`;
         const all_d_records = await sql.query`select * from MongoUpdatesDol`;
 
-        const collection_records_sample = await sql.query`select top 1 * from MongoUpdates`;
+        const collection_records_sample = await sql.query`select top 100 * from MongoUpdates`;
         const d_records_sample = await sql.query`select top 1 * from MongoUpdatesDol`;
 
         globals.updated_records_amount = all_collection_records["recordset"].length + all_d_records["recordset"].length;
 
         let updated_records = {};
+        let updated_record_departments = {};
 
         await Promise.all(d_records_sample["recordset"].map(async (current_database_row) => {
             let IAID = current_database_row["IAID"];
@@ -167,7 +174,15 @@ async function connect_to_mssql() {
                 updated_records["D" + IAID]["record"] = record["scopeContent"]["description"];
 
                 let citable_reference = record["citableReference"].split(' ');
-                updated_records["D" + IAID]["department"] = citable_reference[0];
+                let record_department = citable_reference[0];
+                updated_records["D" + IAID]["department"] = record_department;
+
+                if(!(record_department in updated_record_departments)){
+                    updated_record_departments[record_department] = 0;
+                }
+
+                updated_record_departments[record_department]++;
+
             });
         }));
 
@@ -179,13 +194,24 @@ async function connect_to_mssql() {
                 updated_records["C" + IAID]["record"] = record["scopeContent"]["description"];
 
                 let citable_reference = record["citableReference"].split(' ');
-                updated_records["C" + IAID]["department"] = citable_reference[0];
+                let record_department = citable_reference[0];
+                updated_records["C" + IAID]["department"] = record_department;
+
+
+                if(!(record_department in updated_record_departments)){
+                    updated_record_departments[record_department] = 0;
+                }
+
+                updated_record_departments[record_department]++;
+
             });
 
         }));
 
         console.log(updated_records);
+        console.log(updated_record_departments);
         globals.updated_records = updated_records;
+        globals.updated_record_departments = updated_record_departments;
 
     } catch (err) {
         console.log(err);
@@ -216,7 +242,7 @@ async function get_discovery_api() {
     tomorrow.setDate(tomorrow.getDate() + 1);
     globals.next_update = tomorrow;
 
-    //ISO date strings are needed to get todays and yesterdays dates, for the previous 24 hours
+    //ISO date strings are needed to get todays and yesterdays dates, to display opened records for the previous 24 hours
     let today = new Date();
     let today_ISO_string = today.toISOString().substring(0, 10);
 
@@ -243,12 +269,13 @@ function filter_JSON_data(the_json) {
     let places = {}
     let records = {};
 
+    // For each record, push it to the next index in a new object and map it's title, desc, context to the new object.
     the_json["records"].forEach(function (data) {
 
         records[Object.keys(records).length] = {
             title: data.title,
             description: data.description,
-            context: data.context
+            context: data.context // Different to the record title, usually contains more info about the record.
         };
 
         data["places"].forEach(function (place) {
@@ -268,14 +295,18 @@ function filter_JSON_data(the_json) {
 
     });
 
+
+    // Get every department and map it's count to this object
     let departments = {};
-    the_json["departments"].forEach(function (data) {
-        departments[data["code"]] = data["count"];
+    the_json["departments"].forEach(function (department) {
+
+        // Example output: departments["WO"] = 5 means 5 records opened in the War Office.
+        departments[department["code"]] = department["count"];
     });
 
     return {
-        count: the_json["count"],
-        departments: departments,
+        count: the_json["count"], // Amount of records in total
+        departments,
         taxonomies: the_json["taxonomySubjects"],
         time_periods: the_json["timePeriods"],
         places,
@@ -286,56 +317,64 @@ function filter_JSON_data(the_json) {
 const Mongo = require('mongodb');
 const MongoClient = Mongo.MongoClient;
 const url = 'mongodb://localhost:27017/';
-let db, discovery_feed_users = undefined;
+let db = undefined;
 
 MongoClient.connect(url, function (error, client) {
 
+    // Connect to database
     db = client.db("discovery_feed_login");
 
     if (error) {
         handle_error(error);
     }
     else {
-        discovery_feed_users = db.collection('users');
-        send_notifications();
+        send_notifications(db.collection('users'));
     }
 
     client.close();
 })
 
 
-async function send_notifications() {
+async function send_notifications(discovery_feed_users) {
 
+    // Map global variables to local variables to improve readability
     let discovery_json_records_count = globals.return_object["count"];
-
     let discovery_json_records = globals.return_object["records"];
     let discovery_json_departments = globals.return_object["departments"];
-    let discovery_department_fullnames = globals.departments_json;
+    let discovery_department_fullnames = globals.department_full_names;
     let record_updates = globals.updated_records;
     let record_updates_count = globals.updated_records_amount;
 
+    // For each user, create an email for them
     discovery_feed_users.find({}).forEach((user) => {
 
+        // Get the departments and keywords they have subscribed to
         let users_departments = user["department_subscriptions"];
         let users_keywords = user["keyword_subscriptions"];
 
+        // Create an array where each line on the email will be stored.
         let email_data = [];
+
 
         Object.keys(users_departments).forEach((department_abbreviation) => {
 
+            // Check if records have been opened in the last 24 hours.
             if (discovery_json_records_count > 0) {
 
+                // If one of the departments has a record opened in the last 24hr, continue
                 if (department_abbreviation in discovery_json_departments) {
 
+                    // If the user is subscribed to that record, add the information to the email
                     if (users_departments[department_abbreviation]) {
-                        // Example output: "11 records regarding the War Office."
+
+                        // Example output: "11 records regarding the War Office." because discovery_json_departments looks like {"WO" : 11, "RAIL" : 5 } etc.
                         email_data.push(`${discovery_json_departments[department_abbreviation]} records regarding the ${discovery_department_fullnames[department_abbreviation]}.`);
                     }
                 }
             }
         });
 
-        // Track records that match the users keywords
+        // Track records that match the users keywords using an object. This way we can track the amount of times the keyword has been mentioned, as well as all the titles of the records.
         let user_keyword_opening_matches = {}
         let user_keyword_update_matches = {}
 

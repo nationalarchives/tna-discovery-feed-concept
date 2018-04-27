@@ -3,28 +3,304 @@
     "record": "<emph altrender=\"doctype\">W<\/emph><persname><emph altrender=\"forenames\">Joseph<\/emph><emph altrender=\"surname\">Portal<\/emph><\/persname><geogname>Freefolk Priors , Hampshire<\/geogname>",
     "department": "PROB"
   },
-  "C16670499": {
-    "record": "<scopecontent><p>Apprenticeship Premiums. (Section 63.)<\/p><\/scopecontent>",
+  "C16670579": {
+    "record": "<scopecontent><p>Pugh (ab). (Section 48.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670498": {
-    "record": "<scopecontent><p>A Debenture Stock, issue of. (Section 12.)<\/p><\/scopecontent>",
+  "C16670583": {
+    "record": "<scopecontent><p>Parcels Post Receipts, Apportionment of. (Section 136.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670593": {
+    "record": "<scopecontent><p>Rebate, London and North Western. (Section 109.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670589": {
+    "record": "<scopecontent><p>Railway Clearing House Balances. (Sections 22 and 46.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670587": {
+    "record": "<scopecontent><p>Regulation of Railway Act, 1889 - Capital Expenditure. (Sections 1, 4 and 49.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670506": {
     "record": "<scopecontent><p>Bridges, Cast Iron Girder. (Sections 24, 169 and 181.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
+  "C16670586": {
+    "record": "<scopecontent><p>Penmaenpool, embankment at. (Section 175.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670510": {
+    "record": "<scopecontent><p>Barmouth, Tresspassing at. (Section 52.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670591": {
+    "record": "<scopecontent><p>Roberts, Shunter - accident. (Section 81.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
   "C16670504": {
     "record": "<scopecontent><p>Barmouth Marine Parade. (Sections 14 and 21.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670501": {
+    "record": "<scopecontent><p>Accidents and Casualties. (Sections 70, 75, 81, 100, 103, 107, 117-120, 121a, 123, 141 and 142.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670594": {
+    "record": "<scopecontent><p>Rolling Stock Repaies. (Sections 183, 186, 187, 188, 200, 204 and 208.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670507": {
+    "record": "<scopecontent><p>Block Telegraph - Llanfyllin Branch. (Section 33.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670508": {
+    "record": "<scopecontent><p>Birmingham Corporation Water. (Sections 41 and 55.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670585": {
+    "record": "<scopecontent><p>Property, Lost - sale of. (Section 140.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670531": {
+    "record": "<scopecontent><p>Davies, Edward [child] - Fatal accident. (Section 107.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670532": {
+    "record": "<scopecontent><p>Evans, Edward - Foreman, accident to. (Section 100.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670592": {
+    "record": "<scopecontent><p>Rates, Revised Classification and Schedule of Maximum. (Sections 101 and 105.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670515": {
+    "record": "<scopecontent><p>Bridge between Pool Quay and Buttington. (Section 160.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670521": {
+    "record": "<scopecontent><p>Cork and Fermoy, and Waterford and Wexford Railway. (Section 41.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670517": {
+    "record": "<scopecontent><p>Capital Expenditure - Regulation of Railways Act 1889. (Section 1.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670524": {
+    "record": "<scopecontent><p>Cork and Fermoy Railway. (Section 56.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670536": {
+    "record": "<scopecontent><p>Embankment at Penmaenpool. (Section 175.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670519": {
+    "record": "<scopecontent><p>Coal Contracts. (Section 36.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670537": {
+    "record": "<scopecontent><p>Engine Shed at Machynlleth. (Sections 181 and 202.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670535": {
+    "record": "<scopecontent><p>Ellesmere, accident to up mail at. (Sections 118 and 121a.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670525": {
+    "record": "<scopecontent><p>Cadwallader, Signalman. (Section 67.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670539": {
+    "record": "<scopecontent><p>Fire on Whixall Moss. (Sections 18 and 22.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670542": {
+    "record": "<scopecontent><p>Great Western company's claim, Aberdovey Deviation. (Section 111.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670538": {
+    "record": "<scopecontent><p>Engines. (Sections 197, 202 and 205.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670527": {
+    "record": "<scopecontent><p>Cartwright, Station Master (Section 106.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670545": {
+    "record": "<scopecontent><p>Hood, John. (Sections 56 and 140.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670529": {
+    "record": "<scopecontent><p>Davies, Hugh - Porter. Fatal accident. (Section 75.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670526": {
+    "record": "<scopecontent><p>Conveyance of Single Port Letters by Railway. (Section 67.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670520": {
+    "record": "<scopecontent><p>Cottam, John - Accident to. (Section 37, 46 and 47.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670544": {
+    "record": "<scopecontent><p>Girders, Cast Iron (Bridges). (Sections 24, 169 and 181.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670547": {
+    "record": "<scopecontent><p>Hay Crop. (Section 173.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670541": {
+    "record": "<scopecontent><p>Footbridge at Welshpool. (Section 167.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670562": {
+    "record": "<scopecontent><p>Manchester and Milford Railway. (Section 45.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670543": {
+    "record": "<scopecontent><p>Goods train off road between Montgomery and Abermule. (Section 119.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670528": {
+    "record": "<scopecontent><p>Directors, Number of. (Section 7.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670554": {
+    "record": "<scopecontent><p>Letters, conveyance by train. (Section 67.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670555": {
+    "record": "<scopecontent><p>Ledger Accounts. (Sections 68, 74, 76, 82, 100, 104, 108, 116, 120 and 143.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670551": {
+    "record": "<scopecontent><p>Llanidloes Train Service (Sections 13 and 97.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670552": {
+    "record": "<scopecontent><p>Llanfyllin Branch, block telegraph. (Section 33.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670546": {
+    "record": "<scopecontent><p>Hours of Labour, Railway Servants [Staff]. (Sections 77, 84, 85, 99, 128 and 140.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670568": {
+    "record": "<scopecontent><p>Neath and Brecon Railway, stores for. (Section 17.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670548": {
+    "record": "<scopecontent><p>Iron Bridges constructed with girders of cast iron. (Sections 169, 24 and 181.) <\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670567": {
+    "record": "<scopecontent><p>Machine Tools for Workshop. (Section 184.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670566": {
+    "record": "<scopecontent><p>Machynlleth, addition to Engine Shed. (Sections 181 and 202.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670556": {
+    "record": "<scopecontent><p>Lewis, Richard - Horse Shunter, accident. (Section 103.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670564": {
+    "record": "<scopecontent><p>Midland Toll, Three Cocks and Talyllyn. (Section 114.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670565": {
+    "record": "<scopecontent><p>Mid Wales Section (Section 176.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670563": {
+    "record": "<scopecontent><p>Mail Service, acceleration of. (Section 59.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670553": {
+    "record": "<scopecontent><p>Llanymynech Curve. (Sections 54, 138 and 178.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670549": {
+    "record": "<scopecontent><p>Jones, Isaac - accident to, at Llansanffraid. (Section 147.) <\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670584": {
+    "record": "<scopecontent><p>Passenger Traffic, percentage of First, Second and Third Class. (Section 137.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670569": {
+    "record": "<scopecontent><p>Newtown Fire Brigade. (Section 37.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670498": {
+    "record": "<scopecontent><p>A Debenture Stock, issue of. (Section 12.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670580": {
+    "record": "<scopecontent><p>Portmadoc, Beddgelert and Rhyd-ddu Railway. (Section 56.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670595": {
+    "record": "<scopecontent><p>Statutory Powers. (Section 7.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670502": {
     "record": "<scopecontent><p>Aberdovey deviation line, Great Western Railway company's claim. (Section 111.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670501": {
-    "record": "<scopecontent><p>Accidents and Casualties. (Sections 70, 75, 81, 100, 103, 107, 117-120, 121a, 123, 141 and 142.)<\/p><\/scopecontent>",
+  "C16670559": {
+    "record": "<scopecontent><p>Locomotive Engine. (Sections 197, 202 and 205.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670557": {
+    "record": "<scopecontent><p>Lloyd, J P - Porter, accident. (Section 123.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670575": {
+    "record": "<scopecontent><p>Porthamal Crossing. (Section 16.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670558": {
+    "record": "<scopecontent><p>Lost Property, sale of. (Section 140.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670581": {
+    "record": "<scopecontent><p>Pritchard and Dolgelley. (Sections 102 and 121.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670499": {
+    "record": "<scopecontent><p>Apprenticeship Premiums. (Section 63.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670577": {
+    "record": "<scopecontent><p>Porthdinllaen Railway. (Sections 26 and 55.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670576": {
+    "record": "<scopecontent><p>Postal Telegrams, transmission of. (Section 17.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670574": {
+    "record": "<scopecontent><p>Oswestry, Verandah. (Section 164.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670561": {
+    "record": "<scopecontent><p>Mails Contract. (Sections 37 and 39.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670571": {
+    "record": "<scopecontent><p>Oswald Road, Oswestry. (Section 40.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670596": {
+    "record": "<scopecontent><p>Sleepers. (Section 11.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670570": {
+    "record": "<scopecontent><p>Old Materials. (Section 37.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670503": {
@@ -35,24 +311,64 @@
     "record": "<scopecontent><p>Aberystwyth Electric Lighting. (Section 55.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
+  "C16670582": {
+    "record": "<scopecontent><p>Pryce vs. Cartwright, action for slander. (Section 106.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
   "C16670505": {
     "record": "<scopecontent><p>Barmouth Bridge - use of Season Tickets on. (Section 17.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670508": {
-    "record": "<scopecontent><p>Birmingham Corporation Water. (Sections 41 and 55.)<\/p><\/scopecontent>",
+  "C16670511": {
+    "record": "<scopecontent><p>Barmouth, Old Chapel Crossing. (Section 53.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670588": {
+    "record": "<scopecontent><p>Rails, Steel. (Section 22.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670514": {
+    "record": "<scopecontent><p>Bather, F - Communication to company's staff. (Section 141.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670518": {
+    "record": "<scopecontent><p>Crickhowell and Abergavenny Railway. (Section 21.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670509": {
     "record": "<scopecontent><p>Barmouth Local Board. (Section 50.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670515": {
-    "record": "<scopecontent><p>Bridge between Pool Quay and Buttington. (Section 160.)<\/p><\/scopecontent>",
+  "C16670590": {
+    "record": "<scopecontent><p>Rifle Range, Oswestry Volunteers. (Section 34.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670517": {
-    "record": "<scopecontent><p>Capital Expenditure - Regulation of Railways Act 1889. (Section 1.)<\/p><\/scopecontent>",
+  "C16670522": {
+    "record": "<scopecontent><p>Criccieth, alledged accident to A H Smith. (Section 42.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670523": {
+    "record": "<scopecontent><p>Customs and Inland Revenue Act 1889. (Section 48.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670534": {
+    "record": "<scopecontent><p>Engine off road at Caersws. (Section 117.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670560": {
+    "record": "<scopecontent><p>Machine Tools. (Section 10.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670533": {
+    "record": "<scopecontent><p>Engine off road at Whitchurch. (Section 103.)<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C2182842": {
+    "record": "<scopecontent><p>Reports to Board. Individual reports described at item level.<\/p><\/scopecontent>",
+    "department": "RAIL"
+  },
+  "C16670540": {
+    "record": "<scopecontent><p>Financial position of Company. (Section 30.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670512": {
@@ -63,344 +379,28 @@
     "record": "<scopecontent><p>Builth Train Service. (Section 106.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670511": {
-    "record": "<scopecontent><p>Barmouth, Old Chapel Crossing. (Section 53.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670514": {
-    "record": "<scopecontent><p>Bather, F - Communication to company's staff. (Section 141.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670556": {
-    "record": "<scopecontent><p>Lewis, Richard - Horse Shunter, accident. (Section 103.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670521": {
-    "record": "<scopecontent><p>Cork and Fermoy, and Waterford and Wexford Railway. (Section 41.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670516": {
-    "record": "<scopecontent><p>Barmouth Junction - water supply to company's Cottages at. (Section 175.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670531": {
-    "record": "<scopecontent><p>Davies, Edward [child] - Fatal accident. (Section 107.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670548": {
-    "record": "<scopecontent><p>Iron Bridges constructed with girders of cast iron. (Sections 169, 24 and 181.) <\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670539": {
-    "record": "<scopecontent><p>Fire on Whixall Moss. (Sections 18 and 22.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670549": {
-    "record": "<scopecontent><p>Jones, Isaac - accident to, at Llansanffraid. (Section 147.) <\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670520": {
-    "record": "<scopecontent><p>Cottam, John - Accident to. (Section 37, 46 and 47.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670551": {
-    "record": "<scopecontent><p>Llanidloes Train Service (Sections 13 and 97.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670525": {
-    "record": "<scopecontent><p>Cadwallader, Signalman. (Section 67.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670533": {
-    "record": "<scopecontent><p>Engine off road at Whitchurch. (Section 103.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670535": {
-    "record": "<scopecontent><p>Ellesmere, accident to up mail at. (Sections 118 and 121a.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670518": {
-    "record": "<scopecontent><p>Crickhowell and Abergavenny Railway. (Section 21.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670567": {
-    "record": "<scopecontent><p>Machine Tools for Workshop. (Section 184.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670530": {
-    "record": "<scopecontent><p>Davies, Richard - Platelayer. Fatal accident. (Section 81.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670523": {
-    "record": "<scopecontent><p>Customs and Inland Revenue Act 1889. (Section 48.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670528": {
-    "record": "<scopecontent><p>Directors, Number of. (Section 7.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670540": {
-    "record": "<scopecontent><p>Financial position of Company. (Section 30.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670546": {
-    "record": "<scopecontent><p>Hours of Labour, Railway Servants [Staff]. (Sections 77, 84, 85, 99, 128 and 140.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670519": {
-    "record": "<scopecontent><p>Coal Contracts. (Section 36.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670592": {
-    "record": "<scopecontent><p>Rates, Revised Classification and Schedule of Maximum. (Sections 101 and 105.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670545": {
-    "record": "<scopecontent><p>Hood, John. (Sections 56 and 140.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670526": {
-    "record": "<scopecontent><p>Conveyance of Single Port Letters by Railway. (Section 67.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670544": {
-    "record": "<scopecontent><p>Girders, Cast Iron (Bridges). (Sections 24, 169 and 181.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670552": {
-    "record": "<scopecontent><p>Llanfyllin Branch, block telegraph. (Section 33.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670532": {
-    "record": "<scopecontent><p>Evans, Edward - Foreman, accident to. (Section 100.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670591": {
-    "record": "<scopecontent><p>Roberts, Shunter - accident. (Section 81.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670550": {
-    "record": "<scopecontent><p>Kingstone, Fireman - accident at Whitchurch. (Sections 103 and 122.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670536": {
-    "record": "<scopecontent><p>Embankment at Penmaenpool. (Section 175.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670557": {
-    "record": "<scopecontent><p>Lloyd, J P - Porter, accident. (Section 123.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670547": {
-    "record": "<scopecontent><p>Hay Crop. (Section 173.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C2182842": {
-    "record": "<scopecontent><p>Reports to Board. Individual reports described at item level.<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670527": {
-    "record": "<scopecontent><p>Cartwright, Station Master (Section 106.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670554": {
-    "record": "<scopecontent><p>Letters, conveyance by train. (Section 67.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670542": {
-    "record": "<scopecontent><p>Great Western company's claim, Aberdovey Deviation. (Section 111.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670541": {
-    "record": "<scopecontent><p>Footbridge at Welshpool. (Section 167.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670569": {
-    "record": "<scopecontent><p>Newtown Fire Brigade. (Section 37.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670555": {
-    "record": "<scopecontent><p>Ledger Accounts. (Sections 68, 74, 76, 82, 100, 104, 108, 116, 120 and 143.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670543": {
-    "record": "<scopecontent><p>Goods train off road between Montgomery and Abermule. (Section 119.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670595": {
-    "record": "<scopecontent><p>Statutory Powers. (Section 7.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670510": {
-    "record": "<scopecontent><p>Barmouth, Tresspassing at. (Section 52.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670560": {
-    "record": "<scopecontent><p>Machine Tools. (Section 10.)<\/p><\/scopecontent>",
+  "C16670572": {
+    "record": "<scopecontent><p>Overcharges on Slate Traffic, Minffordd and [Portmasloc]. (Section 69.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670573": {
     "record": "<scopecontent><p>October Train Service. (Section 115.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670571": {
-    "record": "<scopecontent><p>Oswald Road, Oswestry. (Section 40.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670559": {
-    "record": "<scopecontent><p>Locomotive Engine. (Sections 197, 202 and 205.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670558": {
-    "record": "<scopecontent><p>Lost Property, sale of. (Section 140.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670575": {
-    "record": "<scopecontent><p>Porthamal Crossing. (Section 16.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670590": {
-    "record": "<scopecontent><p>Rifle Range, Oswestry Volunteers. (Section 34.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670562": {
-    "record": "<scopecontent><p>Manchester and Milford Railway. (Section 45.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670596": {
-    "record": "<scopecontent><p>Sleepers. (Section 11.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670561": {
-    "record": "<scopecontent><p>Mails Contract. (Sections 37 and 39.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670593": {
-    "record": "<scopecontent><p>Rebate, London and North Western. (Section 109.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670574": {
-    "record": "<scopecontent><p>Oswestry, Verandah. (Section 164.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670563": {
-    "record": "<scopecontent><p>Mail Service, acceleration of. (Section 59.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670576": {
-    "record": "<scopecontent><p>Postal Telegrams, transmission of. (Section 17.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670580": {
-    "record": "<scopecontent><p>Portmadoc, Beddgelert and Rhyd-ddu Railway. (Section 56.)<\/p><\/scopecontent>",
+  "C16670550": {
+    "record": "<scopecontent><p>Kingstone, Fireman - accident at Whitchurch. (Sections 103 and 122.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
   "C16670578": {
     "record": "<scopecontent><p>Pickering, deceased. (Sections 47 and 70.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670566": {
-    "record": "<scopecontent><p>Machynlleth, addition to Engine Shed. (Sections 181 and 202.)<\/p><\/scopecontent>",
+  "C16670530": {
+    "record": "<scopecontent><p>Davies, Richard - Platelayer. Fatal accident. (Section 81.)<\/p><\/scopecontent>",
     "department": "RAIL"
   },
-  "C16670577": {
-    "record": "<scopecontent><p>Porthdinllaen Railway. (Sections 26 and 55.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670553": {
-    "record": "<scopecontent><p>Llanymynech Curve. (Sections 54, 138 and 178.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670522": {
-    "record": "<scopecontent><p>Criccieth, alledged accident to A H Smith. (Section 42.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670565": {
-    "record": "<scopecontent><p>Mid Wales Section (Section 176.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670584": {
-    "record": "<scopecontent><p>Passenger Traffic, percentage of First, Second and Third Class. (Section 137.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670589": {
-    "record": "<scopecontent><p>Railway Clearing House Balances. (Sections 22 and 46.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670582": {
-    "record": "<scopecontent><p>Pryce vs. Cartwright, action for slander. (Section 106.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670585": {
-    "record": "<scopecontent><p>Property, Lost - sale of. (Section 140.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670581": {
-    "record": "<scopecontent><p>Pritchard and Dolgelley. (Sections 102 and 121.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670586": {
-    "record": "<scopecontent><p>Penmaenpool, embankment at. (Section 175.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670583": {
-    "record": "<scopecontent><p>Parcels Post Receipts, Apportionment of. (Section 136.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670588": {
-    "record": "<scopecontent><p>Rails, Steel. (Section 22.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670507": {
-    "record": "<scopecontent><p>Block Telegraph - Llanfyllin Branch. (Section 33.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670587": {
-    "record": "<scopecontent><p>Regulation of Railway Act, 1889 - Capital Expenditure. (Sections 1, 4 and 49.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670537": {
-    "record": "<scopecontent><p>Engine Shed at Machynlleth. (Sections 181 and 202.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670534": {
-    "record": "<scopecontent><p>Engine off road at Caersws. (Section 117.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670594": {
-    "record": "<scopecontent><p>Rolling Stock Repaies. (Sections 183, 186, 187, 188, 200, 204 and 208.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670572": {
-    "record": "<scopecontent><p>Overcharges on Slate Traffic, Minffordd and [Portmasloc]. (Section 69.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670564": {
-    "record": "<scopecontent><p>Midland Toll, Three Cocks and Talyllyn. (Section 114.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670524": {
-    "record": "<scopecontent><p>Cork and Fermoy Railway. (Section 56.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670529": {
-    "record": "<scopecontent><p>Davies, Hugh - Porter. Fatal accident. (Section 75.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670538": {
-    "record": "<scopecontent><p>Engines. (Sections 197, 202 and 205.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670579": {
-    "record": "<scopecontent><p>Pugh (ab). (Section 48.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670568": {
-    "record": "<scopecontent><p>Neath and Brecon Railway, stores for. (Section 17.)<\/p><\/scopecontent>",
-    "department": "RAIL"
-  },
-  "C16670570": {
-    "record": "<scopecontent><p>Old Materials. (Section 37.)<\/p><\/scopecontent>",
+  "C16670516": {
+    "record": "<scopecontent><p>Barmouth Junction - water supply to company's Cottages at. (Section 175.)<\/p><\/scopecontent>",
     "department": "RAIL"
   }
 }

@@ -4,7 +4,7 @@ module.exports = {
     get_departments: () => {
 
         let departments_data = globals.return_object["departments"];
-        let department_long_names = globals.departments_json["departments"];
+        let department_long_names = globals.department_full_names["departments"];
 
         let return_data = `<ul>`;
         for (let i = 0; i < departments_data.length; i++) {
@@ -67,7 +67,7 @@ module.exports = {
         return `${return_data} </ul>`;
     },
     get_long_department_name: key => {
-       return globals.departments_json[key];
+       return globals.department_full_names[key];
     },
     get_updated_records_info: () => {
     return `<h1>${globals.updated_records_amount} records updated in the last week.</h1>`;
@@ -80,7 +80,6 @@ module.exports = {
 
           return_data += `<li>
                                 <a href="http://discovery.nationalarchives.gov.uk/details/r/${record_id}" target="_blank">${records[record_id]["record"]}</a>
-                                <ul><li>${records[record_id]["department"]}</li></ul>
                           </li>`;
       }
 

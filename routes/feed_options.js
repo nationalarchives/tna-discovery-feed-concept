@@ -9,7 +9,7 @@ router.get('/subscriptions', globals.ensure_authenticated, function (req, res) {
 
 router.post('/subscriptions/departments', globals.ensure_authenticated, function(req, res) {
     let userDepartments = {};
-    let departments = globals.departments_json;
+    let departments = globals.department_full_names;
 
     Object.keys(departments).forEach(function (key) {
         userDepartments[key] = (req.body[key] == 'on');

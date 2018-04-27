@@ -39,7 +39,13 @@
         <div class="col-md-6">
             {{#get_updated_records_info}}
             {{/get_updated_records_info}}
-
+            <h2>Departments</h2>
+            <ul>
+            {{#each updated_department}}
+                <li>{{#get_long_department_name @key}}
+                {{/get_long_department_name}}: {{this}}</li>
+            {{/each}}
+            </ul>
             <h2>Record titles</h2>
             <div id="record-updates-overflow">
                 {{#get_updated_records}}
