@@ -138,7 +138,7 @@ app.listen(app.get('port'), function (error) {
 
     }
 
-    // connect_to_mssql();
+   // connect_to_mssql();
 
 })
 
@@ -151,8 +151,8 @@ async function connect_to_mssql() {
         const all_collection_records = await sql.query`select * from MongoUpdates`;
         const all_d_records = await sql.query`select * from MongoUpdatesDol`;
 
-        const collection_records_sample = await sql.query`select top 100 * from MongoUpdates`;
-        const d_records_sample = await sql.query`select top 100 * from MongoUpdatesDol`;
+        const collection_records_sample = await sql.query`select top 1 * from MongoUpdates`;
+        const d_records_sample = await sql.query`select top 1 * from MongoUpdatesDol`;
 
         globals.updated_records_amount = all_collection_records["recordset"].length + all_d_records["recordset"].length;
 
@@ -162,6 +162,7 @@ async function connect_to_mssql() {
             let IAID = current_database_row["IAID"];
 
             await get_JSON_async("http://discovery.nationalarchives.gov.uk/API/records/v1/details/D" + IAID, (error, record) => {
+
                 updated_records["D" + IAID] = {};
                 updated_records["D" + IAID]["record"] = record["scopeContent"]["description"];
 
@@ -270,7 +271,7 @@ function filter_JSON_data(the_json) {
     let departments = {};
     the_json["departments"].forEach(function (data) {
         departments[data["code"]] = data["count"];
-    })
+    });
 
     return {
         count: the_json["count"],
@@ -310,6 +311,8 @@ async function send_notifications() {
     let discovery_json_records = globals.return_object["records"];
     let discovery_json_departments = globals.return_object["departments"];
     let discovery_department_fullnames = globals.departments_json;
+    let record_updates = globals.updated_records;
+    let record_updates_count = globals.updated_records_amount;
 
     discovery_feed_users.find({}).forEach((user) => {
 
@@ -333,7 +336,8 @@ async function send_notifications() {
         });
 
         // Track records that match the users keywords
-        let user_keyword_tracker = {}
+        let user_keyword_opening_matches = {}
+        let user_keyword_update_matches = {}
 
         users_keywords.forEach(function (current_user_keyword) {
             current_user_keyword = current_user_keyword.toLowerCase();
@@ -347,23 +351,45 @@ async function send_notifications() {
 
                     if (description.includes(current_user_keyword) || title.includes(current_user_keyword)) {
 
-                        if (!(current_user_keyword in user_keyword_tracker)) {
-                            user_keyword_tracker[current_user_keyword] = {};
-                            user_keyword_tracker[current_user_keyword]["count"] = 0;
-                            user_keyword_tracker[current_user_keyword]["titles"] = [];
+                        if (!(current_user_keyword in user_keyword_opening_matches)) {
+                            user_keyword_opening_matches[current_user_keyword] = {};
+                            user_keyword_opening_matches[current_user_keyword]["count"] = 0;
+                            user_keyword_opening_matches[current_user_keyword]["titles"] = [];
                         }
 
-                        user_keyword_tracker[current_user_keyword]["count"]++;
-                        user_keyword_tracker[current_user_keyword]["titles"].push(`${title} <ul><li>${description}</li></ul>`);
+                        user_keyword_opening_matches[current_user_keyword]["count"]++;
+                        user_keyword_opening_matches[current_user_keyword]["titles"].push(`${title} <ul><li>${description}</li></ul>`);
                     }
 
                 }
             }
 
+            if(record_updates_count > 0) {
+
+                for(let index in record_updates) {
+                    let record_description = record_updates[index]["record"].toLowerCase();
+
+                    if(record_description.includes(current_user_keyword)) {
+                        if( !(current_user_keyword in user_keyword_update_matches)){
+                            user_keyword_update_matches[current_user_keyword] = {};
+                            user_keyword_update_matches[current_user_keyword]["count"] = 0;
+                            user_keyword_update_matches[current_user_keyword]["titles"] = [];
+                        }
+
+                        user_keyword_update_matches[current_user_keyword]["count"]++;
+                        user_keyword_update_matches[current_user_keyword]["titles"].push(record_description);
+
+                    }
+                }
+            }
         });
 
-        Object.keys(user_keyword_tracker).forEach(function (keyword) {
-            email_data.push(`${user_keyword_tracker[keyword]["count"]} keyword matches for your keyword, "${keyword}".`);
+        Object.keys(user_keyword_opening_matches).forEach(function (keyword) {
+            email_data.push(`${user_keyword_opening_matches[keyword]["count"]} opened records matching your keyword, "${keyword}".`);
+        });
+
+        Object.keys(user_keyword_update_matches).forEach(function (keyword) {
+            email_data.push(`${user_keyword_update_matches[keyword]["count"]} records updated matching your keyword, "${keyword}".`);
         });
 
         if (email_data.length > 1) {
