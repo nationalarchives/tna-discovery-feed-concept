@@ -12,9 +12,28 @@
 
 
 <form method="post" action="/users/register">
-    First Name <input type=text" name="name"/><br/>
-    Email <input type=text" name="email" /><br/>
-    Username <input type=text" name="username" /><br/>
-    Password <input type="password" name="password"/><br/>
-    <input type="submit" />
+    <fieldset>
+        <div class="form-row">
+        <label for="name">First Name</label>
+        <input type=text" name="name" id="name"/>
+    </div>
+
+
+        <div class="form-row">
+            <label for="email">Email</label>
+            <input type=text" name="email" id="email"/>
+        </div>
+
+        <div class="form-row">
+            <label for="username">Username</label>
+            <input type=text" name="username" id="username"/>
+        </div>
+
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password"/>
+        </div>
+
+        <input type="submit" value="Register"/>
+    </fieldset>
 </form>
