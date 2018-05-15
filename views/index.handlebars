@@ -1,57 +1,73 @@
 <div class="row">
+    <main role="main">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <article>
+                        <div class="entry-header">
+                            {{#get_feed_info}}
+                            {{/get_feed_info}}
+                        </div>
+                        <div class="row entry-content">
 
-    <div class="col-md-12">
+                            <h2>Departments</h2>
+                            <ul>
+                                {{#each departments }}
+                                <li>
+                                    {{#get_long_department_name @key}}
+                                    {{/get_long_department_name}}: {{this}}
+                                </li>
+                                {{/each}}
+                            </ul>
 
-        <div class="col-md-6">
-            {{#get_feed_info}}
-            {{/get_feed_info}}
-                <h2>Departments</h2>
-                <ul>
-                    {{#each departments }}
-                        <li>
-                            {{#get_long_department_name @key}}
-                            {{/get_long_department_name}}: {{this}}
-                        </li>
-                    {{/each}}
-                </ul>
+                            <!--<h2>Places</h2>
+                    {{#get_places }}
+                            {{/get_places}}-->
 
-                <!--<h2>Places</h2>
-        {{#get_places }}
-                {{/get_places}}-->
-
-                <h2>Taxonomies</h2>
-                {{#get_taxonomies }}
-                {{/get_taxonomies}}
+                            <h2>Taxonomies</h2>
+                            {{#get_taxonomies }}
+                            {{/get_taxonomies}}
 
 
-                <h2>Time periods</h2>
-                {{#get_time_periods }}
-                {{/get_time_periods}}
+                            <h2>Time periods</h2>
+                            {{#get_time_periods }}
+                            {{/get_time_periods}}
 
-                <h2>Record titles</h2>
-                <div id="record-openings-overflow">
-                    {{#get_record_titles}}
-                    {{/get_record_titles}}
+                            <h2>Record titles</h2>
+                            <div id="record-openings-overflow">
+                                {{#get_record_titles}}
+                                {{/get_record_titles}}
+                            </div>
+
+
+                        </div>
+                    </article>
                 </div>
+                <div class="col-md-6">
+                    <article>
+                    <div class="entry-header">
+                        {{#get_updated_records_info}}
+                        {{/get_updated_records_info}}
+                    </div>
 
-
-        </div>
-        <div class="col-md-6">
-            {{#get_updated_records_info}}
-            {{/get_updated_records_info}}
-            <h2>Departments</h2>
-            <ul>
-            {{#each updated_department}}
-                <li>{{#get_long_department_name @key}}
-                {{/get_long_department_name}}: {{this}}</li>
-            {{/each}}
-            </ul>
-            <h2>Record titles</h2>
-            <div id="record-updates-overflow">
-                {{#get_updated_records}}
-                {{/get_updated_records}}
+                    <div class="row entry-content">
+                        <h2>Departments</h2>
+                        <ul>
+                            {{#each updated_department}}
+                            <li>{{#get_long_department_name @key}}
+                                {{/get_long_department_name}}: {{this}}</li>
+                            {{/each}}
+                        </ul>
+                        <h2>Record titles</h2>
+                        <div id="record-updates-overflow">
+                            {{#get_updated_records}}
+                            {{/get_updated_records}}
+                        </div>
+                    </div>
+                    </article>
             </div>
         </div>
-    </div>
+        </div>
+    </main>
 </div>
 
