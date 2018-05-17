@@ -1,5 +1,4 @@
 /* Login system from https://www.youtube.com/watch?v=Z1ktxiqyiLA */
-const assert = require('assert');
 const express = require("express");
 
 // BEGIN Login dependencies
@@ -26,12 +25,14 @@ const app = express();
 
 const fetch = require("node-fetch");
 const nodemailer = require("nodemailer");
-const tests = require("./tests");
 
 //Config files not pushed to GitHub for security
 const email_account = require("./email_account.js");
 const db_config = require("./db_config.js");
-
+const Mongo = require('mongodb');
+const MongoClient = Mongo.MongoClient;
+const url = 'mongodb://localhost:27017/';
+let db = undefined;
 
 let transporter = nodemailer.createTransport({
 
@@ -136,17 +137,13 @@ app.listen(3000, function (error) {
          // Run every 24 hours.
          setInterval(get_discovery_api, 86400000);*/
 
-        tests.test_discovery_json(globals.discovery_json);
-
         globals.return_object = filter_JSON_data(globals.discovery_json);
-
-        tests.test_filtered_json(globals.return_object);
 
     }
 
    // get_record_updates_MSSQL();
 
-})
+});
 
 const sql = require('mssql');
 
@@ -208,8 +205,6 @@ async function get_record_updates_MSSQL() {
 
         }));
 
-        console.log(updated_records);
-        console.log(updated_record_departments);
         globals.updated_records = updated_records;
         globals.updated_record_departments = updated_record_departments;
 
@@ -227,7 +222,6 @@ async function get_JSON_async(url, callback) {
     try {
         const http_response = await fetch(url);
         const return_json = await http_response.json();
-        tests.is_JSON(return_json);
         return callback(null, return_json);
     }
     catch (error) {
@@ -250,7 +244,7 @@ async function get_discovery_api() {
     yesterday.setDate(yesterday.getDate() - 1);
     let yesterday_ISO_string = yesterday.toISOString().substring(0, 10);
 
-    const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`
+    const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`;
 
     await get_JSON_async(url, function (error, return_json) {
         if (error) {
@@ -266,7 +260,7 @@ async function get_discovery_api() {
 
 function filter_JSON_data(the_json) {
 
-    let places = {}
+    let places = {};
     let records = {};
 
     // For each record, push it to the next index in a new object and map it's title, desc, context to the new object.
@@ -314,11 +308,6 @@ function filter_JSON_data(the_json) {
     };
 }
 
-const Mongo = require('mongodb');
-const MongoClient = Mongo.MongoClient;
-const url = 'mongodb://localhost:27017/';
-let db = undefined;
-
 MongoClient.connect(url, function (error, client) {
 
     // Connect to database
@@ -332,7 +321,7 @@ MongoClient.connect(url, function (error, client) {
     }
 
     client.close();
-})
+});
 
 
 async function send_notifications(discovery_feed_users) {
@@ -375,8 +364,8 @@ async function send_notifications(discovery_feed_users) {
         });
 
         // Track records that match the users keywords using an object. This way we can track the amount of times the keyword has been mentioned, as well as all the titles of the records.
-        let user_keyword_opening_matches = {}
-        let user_keyword_update_matches = {}
+        let user_keyword_opening_matches = {};
+        let user_keyword_update_matches = {};
 
         users_keywords.forEach(function (current_user_keyword) {
             current_user_keyword = current_user_keyword.toLowerCase();
@@ -459,4 +448,3 @@ async function send_notifications(discovery_feed_users) {
 
     })
 }
-

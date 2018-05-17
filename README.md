@@ -24,6 +24,8 @@ Current technologies:
 * [nodemon](https://www.npmjs.com/package/nodemon) - auto reload the server after code changes  
 * [nodemailer](https://www.npmjs.com/package/nodemailer) - send emails to users  
 * [mssql](https://www.npmjs.com/package/mssql) - connects to a mssql database to pull record updates
+
+This project uses EditorConfig to standardize text editor configuration. http://editorconfig.org
     
 Installation:  
 
