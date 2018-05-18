@@ -1,3 +1,4 @@
 public/tna-css-toolkit
 node_modules/
 .idea/
+db_config.js
