@@ -23,7 +23,9 @@ const globals = require('./functions/globals');
 
 const app = express();
 
-const fetch = require("node-fetch");
+let fetch = require("node-fetch");
+let tools = require("./tools.js");
+
 const nodemailer = require("nodemailer");
 
 //Config files not pushed to GitHub for security
@@ -125,23 +127,39 @@ app.use('/users', users);
 app.use('/feed', feed_options);
 app.use('/data', data_route);
 
-app.listen(3000, function (error) {
+app.listen(3000, async function (error) {
     if (error) {
         handle_error(error);
     }
     else {
         console.log("Server started")
 
-        /* get_discovery_api();
+        /*
 
-         // Run every 24 hours.
-         setInterval(get_discovery_api, 86400000);*/
+        let today = new Date();
+        let today_ISO_string = today.toISOString().substring(0, 10);
 
-        globals.return_object = filter_JSON_data(globals.discovery_json);
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        let yesterday_ISO_string = yesterday.toISOString().substring(0, 10);
+        let discovery_json = await tools.get_discovery_api_as_JSON();
+        get_record_updates_MSSQL();
 
+        run every 24 hours:
+        setInterval(tools.get_discovery_api_as_JSON(), 86400000);
+        setInterval(get_record_updates_MSSQL(), 86400000);
+
+         */
+
+      let today = new Date();
+      let today_ISO_string = today.toISOString().substring(0, 10);
+
+      let yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      let yesterday_ISO_string = yesterday.toISOString().substring(0, 10);
+      let discovery_json = await tools.get_discovery_api_as_JSON(yesterday_ISO_string, today_ISO_string, fetch);
+      console.log(discovery_json);
     }
-
-   // get_record_updates_MSSQL();
 
 });
 
@@ -230,34 +248,6 @@ async function get_JSON_async(url, callback) {
 
 }
 
-async function get_discovery_api() {
-
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    globals.next_update = tomorrow;
-
-    //ISO date strings are needed to get todays and yesterdays dates, to display opened records for the previous 24 hours
-    let today = new Date();
-    let today_ISO_string = today.toISOString().substring(0, 10);
-
-    let yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    let yesterday_ISO_string = yesterday.toISOString().substring(0, 10);
-
-    const url = `http://discovery.nationalarchives.gov.uk/API/search/records?sps.heldByCode=TNA&sps.recordOpeningFromDate=${yesterday_ISO_string}&sps.recordOpeningToDate=${today_ISO_string}&sps.searchQuery=*&sps.sortByOption=DATE_ASCENDING&sps.resultsPageSize=1000`;
-
-    await get_JSON_async(url, function (error, return_json) {
-        if (error) {
-            handle_error(error);
-        }
-        else {
-            globals.return_object = filter_JSON_data(return_json);
-        }
-
-    })
-
-}
-
 function filter_JSON_data(the_json) {
 
     let places = {};
@@ -288,7 +278,6 @@ function filter_JSON_data(the_json) {
         });
 
     });
-
 
     // Get every department and map it's count to this object
     let departments = {};
@@ -327,9 +316,9 @@ MongoClient.connect(url, function (error, client) {
 async function send_notifications(discovery_feed_users) {
 
     // Map global variables to local variables to improve readability
-    let discovery_json_records_count = globals.return_object["count"];
-    let discovery_json_records = globals.return_object["records"];
-    let discovery_json_departments = globals.return_object["departments"];
+    let discovery_json_records_count = globals.discovery_json["count"];
+    let discovery_json_records = globals.discovery_json["records"];
+    let discovery_json_departments = globals.discovery_json["departments"];
     let discovery_department_fullnames = globals.department_full_names;
     let record_updates = globals.updated_records;
     let record_updates_count = globals.updated_records_amount;
