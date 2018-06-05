@@ -3,7 +3,7 @@ const globals = require("../functions/globals");
 module.exports = {
     get_departments: () => {
 
-        let departments_data = globals.return_object["departments"];
+        let departments_data = globals.discovery_json["departments"];
         let department_long_names = globals.department_full_names["departments"];
 
         let return_data = `<ul>`;
@@ -24,7 +24,7 @@ module.exports = {
     },
 
     get_places: () => {
-        let places = globals.return_object["places"];
+        let places = globals.discovery_json["places"];
         let return_data = `<ul>`;
         if( places.length > 0){
 
@@ -39,7 +39,7 @@ module.exports = {
         return `${return_data} </ul>`;
     },
     get_taxonomies: () => {
-        let taxonomies = globals.return_object["taxonomies"];
+        let taxonomies = globals.discovery_json["taxonomies"];
         let return_data = `<ul>`;
         for(let taxonomy in taxonomies){
            return_data += `<li> ${taxonomies[taxonomy]["code"]} : ${taxonomies[taxonomy]["count"]} </li>`;
@@ -47,7 +47,7 @@ module.exports = {
         return `${return_data} </ul>`;
     },
     get_time_periods: () => {
-        let time_periods = globals.return_object["time_periods"];
+        let time_periods = globals.discovery_json["time_periods"];
         let return_data = `<ul>`;
         for(let time_period in time_periods){
             return_data += `<li> ${time_periods[time_period]["code"]} : ${time_periods[time_period]["count"]}`
@@ -55,12 +55,12 @@ module.exports = {
         return `${return_data} </ul>`;
     },
     get_feed_info: () => {
-        let count = globals.return_object["count"];
+        let count = globals.discovery_json["count"];
         return `<h1> ${count}  records opened in the last 24 hours.</h1>`
     },
     get_record_titles: () => {
         let return_data = `<ul>`;
-        let records = globals.return_object["records"];
+        let records = globals.discovery_json["records"];
         for(let record in records) {
             return_data += `<li>${records[record]["description"]} <ul><li>${records[record]["context"]}</li></ul> </li>`;
         }

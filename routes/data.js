@@ -7,7 +7,7 @@ router.get("/departments-json", function (req, res) {
 })
 
 router.get("/filtered-json", function (req, res) {
-    res.send(JSON.stringify(globals.return_object));
+    res.send(JSON.stringify(globals.discovery_json));
 })
 
 module.exports = router;
