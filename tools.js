@@ -39,8 +39,6 @@ exports.filter_JSON_data = (the_json) => {
                 });
             }
 
-
-
         });
     }
 

@@ -47,6 +47,49 @@ describe("testing the discovery API", function () {
       });
 
 
+      const mongoose = require('mongoose');
+      const Schema = mongoose.Schema;
+      const user_schema = new Schema({
+      name: {type: String},
+      email: {type: String},
+      username:{type: String},
+      password: {type: String},
+      department_subscriptions: require("../data/empty_department_subscriptions.json"),
+      taxonomy_subscriptions: require("../data/empty_taxonomy_subscriptions.json"),
+      keyword_subscriptions: []
+    })
+    const User = mongoose.model('User', user_schema);
+
+      describe('Database Testing', function () {
+
+        before(function (done) {
+
+          mongoose.connect('mongodb://localhost/notification_feed_test_db');
+
+          const db = mongoose.connection;
+          db.on('error', console.error.bind(console, 'connection error'));
+          db.once('open', function () {
+            console.log('DB connection successful');
+            done();
+          });
+        });
+
+        describe('Test mongo database', function () {
+
+          it('should save a new user', function (done) {
+            var test_user = User({
+              name: 'unit test'
+            });
+
+            test_user.save(done);
+
+          })
+
+        })
+
+
+      });
+
 
 
 
